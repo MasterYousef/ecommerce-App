@@ -10,9 +10,9 @@ function ProductByCategoryHook() {
     const res = useSelector(state=>state.GetMyProducts.Products)
     const Loading = useSelector(state=>state.GetMyProducts.Loading)
     useEffect(() => {
-        dis(GetProducts(`/api/v1/products?category=${id}&page=${page}&limit=12`))
+        dis(GetProducts(`/api/v1/product?category=${id}&page=${page}&limit=12`))
     }, [page])
-    return [res,Loading,setPage]
+    return [res,Loading,setPage,page]
 }
 
 export default ProductByCategoryHook

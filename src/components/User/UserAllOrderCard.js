@@ -3,7 +3,7 @@ import { Col, Row } from 'react-bootstrap'
 function UserAllOrderCard({item}) {
   return (
     <Col xs="12" className="bg-white rounded p-1  d-flex px-2">
-    <img width="160px" height="197px" src={`http://localhost:8000/products/${item?.product.imageCover}`} alt="" className='rounded mx-2'/>
+    <img width="160px" height="197px" src={item?.product.imageCover} alt="" className='rounded mx-2'/>
     <div className="w-100">
       <Row className="justify-content-center mt-2">
         <Col sm="12" className=" d-flex flex-row justify-content-start">
@@ -31,7 +31,7 @@ function UserAllOrderCard({item}) {
             <input
               className="mx-2 text-center"
               type="number"
-              value={item?.count}
+              value={item?.quantity}
               style={{ width: "40px", height: "25px" }}
             />
           </div>

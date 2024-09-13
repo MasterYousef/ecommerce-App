@@ -4,7 +4,7 @@ import ProductByCategoryHook from '../../logic/product/ProductByCategoryHook'
 import GetFavProductHook from '../../logic/product/GetFavProductHook'
 import ProductCard from '../../components/product/ProductCard'
 function ProductByCategory() {
-  const [res,Loading,setPage] = ProductByCategoryHook()
+  const [res,Loading,setPage,page] = ProductByCategoryHook()
   const [favId] = GetFavProductHook()
   return (
     <Container style={{minHeight:"90vh"}}>
@@ -17,7 +17,7 @@ function ProductByCategory() {
         </Row>
         {
           res?.paginationResult?.numberOfPages ? (res?.paginationResult?.numberOfPages <=1 ? null
-            :(<Pagination numberOfPages={res?.paginationResult?.numberOfPages} SetPage={setPage}/>)):null
+            :(<Pagination numberOfPages={res?.paginationResult?.numberOfPages} SetPage={setPage}page={page}/>)):null
         }
     </Container>
   )

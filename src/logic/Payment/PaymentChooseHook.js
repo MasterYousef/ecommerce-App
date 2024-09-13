@@ -1,80 +1,85 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { GetAddress } from '../../redux/slices/user/Address';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { GetAddress } from "../../redux/slices/user/Address";
 import { toast } from "react-toastify";
-import { GetCart } from '../../redux/slices/cart/Cart';
-import { PostOrder ,GetCardOrder} from '../../redux/slices/payment/Order';
-import {useNavigate} from 'react-router-dom'
+import { GetCart } from "../../redux/slices/cart/Cart";
+import { PostOrder, PostCardOrder } from "../../redux/slices/payment/Order";
+import { useNavigate } from "react-router-dom";
 function PaymentChooseHook() {
-const navti = useNavigate()
-const dis=useDispatch()
-const res = useSelector(state=>state.AddressSlice.GetData?.data)
-const cart = useSelector(state=>state.CartSlice.GetData?.data)
-const order = useSelector(state=>state.OrderSlice.PostData)
-const Card = useSelector(state=>state.OrderSlice.CardData?.data)
-const [Pay, setPay] = useState("")
-const [loading, setLoading] = useState("")
-const [loading2, setLoading2] = useState("")
-const [option, setOption] = useState("0")
-let price;
-if(cart?.data?.totalAfterDiscount){
-    price = cart?.data?.totalAfterDiscount
-}else{
-    price = cart?.data?.totalCartPrice
-}
-const onSubmit =async()=>{
-    if(Pay === ""){
-        toast.warn("من فضلك اختر طريقة الدفع")
-        return;
-    }else if(option === "0"){
-        toast.warn("من فضلك اختر عنوان")
-        return;
-    }else if(Pay === "الدفع عند الاستلام"){
-        setLoading(true)
-        const obj = {
-            id:cart?.data?._id,
-            data:{
-                shippingAddress:res.data[option-1]
-            }
-        }
-        await dis(PostOrder(obj)) 
-        setLoading(false)
-    }else if(Pay === "الدفع عن طريق الفيزا"){
-        setLoading2(true)
-        await dis(GetCardOrder(cart?.data?._id))
-        setLoading2(false)
+  const navti = useNavigate();
+  const dis = useDispatch();
+  const res = useSelector((state) => state.AddressSlice.GetData);
+  const cart = useSelector((state) => state.CartSlice.GetData);
+  const order = useSelector((state) => state.OrderSlice.PostData);
+  const Card = useSelector((state) => state.OrderSlice.CardData);
+  const [Pay, setPay] = useState("");
+  const [loading, setLoading] = useState("");
+  const [loading2, setLoading2] = useState("");
+  const [option, setOption] = useState("0");
+  const [price, setPrice] = useState("0");
+
+  useEffect(() => {
+    if (cart?.data?.data?.totalPriceAfterDiscount) {
+      setPrice(cart?.data?.totalPriceAfterDiscount);
+    } else {
+      setPrice(cart?.data?.data?.totalPrice);
     }
-}
-useEffect(() => {
-dis(GetAddress("/api/v1/addresses"))
-dis(GetCart())
-}, [])
-useEffect(() => {
-if(loading === false){
-    if(order?.status === "error" || order?.status === "fail"){
-        toast.error("حدث خطاء ما الرجاء المحاولة مرة اخرى لاحقا")
-    }else if(order?.data?.status === "success"){
-        toast.success("تم عمل الطلب بنجاح")
-        localStorage.removeItem("cart")
+  }, [cart]);
+  const onSubmit = () => {
+    if (Pay === "") {
+      toast.warn("من فضلك اختر طريقة الدفع");
+      return;
+    } else if (option === "0") {
+      toast.warn("من فضلك اختر عنوان");
+      return;
+    } else if (Pay === "الدفع عند الاستلام") {
+      setLoading(true);
+      const obj = {
+        id: cart?.data?._id,
+        data: {
+          shippingAddress: res?.data?.addresses[option - 1]?._id,
+        },
+      };
+      dis(PostOrder(obj));
+      setLoading(false);
+    } else if (Pay === "الدفع عن طريق الفيزا") {
+      const obj = {
+        shippingAddress: res?.data?.addresses[option - 1]?._id
+      };
+      setLoading2(true);
+      dis(PostCardOrder(obj));
+      setLoading2(false);
+    }
+  };
+  useEffect(() => {
+    dis(GetAddress("/api/v1/user/userAddresses"));
+    dis(GetCart());
+  }, []);
+  useEffect(() => {
+    if (loading === false) {
+      if (order?.data?.status !== "success") {
+        toast.error("حدث خطاء ما الرجاء المحاولة مرة اخرى لاحقا");
+      } else if (order?.data?.status === "success") {
+        toast.success("تم عمل الطلب بنجاح");
+        localStorage.removeItem("cart");
         setTimeout(() => {
-            navti("/user/allorders")
+          navti("/user/allorders");
         }, 2000);
+      }
     }
-}
-}, [loading])
-useEffect(() => {
-    if(loading2 === false){
-        if(Card?.status=== 'success'){
-            if(Card?.session?.url){
-                window.open(Card?.session?.url)
-            }
-        }else{
-            toast.error("حدث خطاء ما الرجاء المحاولة لاحقا")
+  }, [order]);
+  useEffect(() => {
+    if (loading2 === false) {
+      if (Card?.data?.status === "success") {
+        if (Card?.data?.data?.url) {
+          window.open(Card?.data?.data?.url);
         }
-        }
-    }, [loading2])
-    console.log(Card);
-return [price,res,setPay,option,setOption,onSubmit,loading,loading2]
+      } else if(Card?.status !== "success"){
+        toast.error("حدث خطاء ما الرجاء المحاولة لاحقا");
+      }
+    }
+  }, [Card]);
+  return [price, res?.data, setPay, option, setOption, onSubmit, loading, loading2];
 }
 
-export default PaymentChooseHook
+export default PaymentChooseHook;

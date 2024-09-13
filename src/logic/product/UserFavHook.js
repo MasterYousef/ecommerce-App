@@ -16,9 +16,9 @@ function UserFavHook() {
     }, [])
     let favArray;
     if(res?.data){
-        favArray = JSON.parse(JSON.stringify(res?.data.data))
+        favArray = JSON.parse(JSON.stringify(res?.data.favoriteList))
         favArray.map((e)=>{
-            return e.imageCover  = `http://localhost:8000/products/${e.imageCover}`
+            return e.imageCover  = e.imageCover
         })
         }
     return [favArray,Loading]

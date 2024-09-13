@@ -1,10 +1,10 @@
 import BaseUrl from "../Api/BaseUrl"
 
-const useDeleteData = async (url,par)=>{
+const usePatchData = async (url,par)=>{
     const config={
         headers:{Authorization : `Bearer ${localStorage.getItem('token')}`}
     }
-    const res = await BaseUrl.delete(url,config);
+    const res = await BaseUrl.patch(url,par,config);
     return res
 }
-export default useDeleteData
+export default usePatchData;

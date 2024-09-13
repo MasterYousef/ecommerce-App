@@ -44,7 +44,7 @@ function PymentChoose() {
             <select className='w-25' placeholder='اختر العنوان' name='Adrress' value={option} onChange={(e)=>setOption(e.target.value)}>
             <option value="0">اختر العنوان  </option>
             {
-                res?.data ? (res?.data.map((e,index)=><option key={index} value={index+1}>{e?.alias}</option>)):null
+                res?.addresses ? (res?.addresses.map((e,index)=><option key={index} value={index+1}>{e?.alias}</option>)):null
             }
             </select>
         </Row>

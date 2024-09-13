@@ -11,7 +11,7 @@ if(product.data){
     items = []
 }
 useEffect(()=>{
-    dis(GetProducts('/api/v1/products'))
+    dis(GetProducts('/api/v1/product'))
 },[])
 return [items]
 }

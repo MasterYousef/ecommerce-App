@@ -3,16 +3,17 @@ import {useInsertDataWithImg} from '../../../hooks/useInsertData'
 export const PostBrands = createAsyncThunk('brand/PostBrand',async (FormData,thunkAPI)=>{
     const {rejectWithValue} = thunkAPI;
     try{
-        const respon = await useInsertDataWithImg('/api/v1/brands',FormData);
+        const respon = await useInsertDataWithImg('/api/v1/brand',FormData);
         return respon
     }catch(err){
+    console.log(err);
         return rejectWithValue(err.message)
     }
 
 })
 const initialState = {
     Loading:false,
-    error:false
+    error:""
 }
 const PostAllBrand = createSlice({
     name:'PostAllBrand',
@@ -20,7 +21,6 @@ const PostAllBrand = createSlice({
     extraReducers:{
         [PostBrands.pending]:(state,action)=>{
             state.Loading = true;
-
         },
         [PostBrands.fulfilled]:(state,action)=>{
             state.Loading = false;
@@ -28,7 +28,7 @@ const PostAllBrand = createSlice({
         },
         [PostBrands.rejected]:(state,action)=>{
             state.Loading = false;
-            state.error = action.payload
+            state.error = true
         }
     }
 })

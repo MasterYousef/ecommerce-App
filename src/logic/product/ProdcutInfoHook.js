@@ -1,40 +1,29 @@
-import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import {GetProduct} from '../../redux/slices/Product/GetOneProduct'
-import {GetOnecate} from '../../redux/slices/Category/GetOneCategory'
-import {GetOneBr} from '../../redux/slices/Brand/GetOneBrand'
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { GetProduct } from "../../redux/slices/Product/GetOneProduct";
+import { GetOneBr } from "../../redux/slices/Brand/GetOneBrand";
 
 function ProdcutInfoHook(id) {
-    const dis = useDispatch()
-    const product = useSelector((state)=>state.GetOneProduct.Product)
-    const cate = useSelector((state)=>state.GetOneCategory.category)
-    const brand = useSelector((state)=>state.GetOneBrand.brand)
-    let item = []
-    if(product.data){
-        item = product.data
-    }else{
-        item = []
+  const dis = useDispatch();
+  const product = useSelector((state) => state.GetOneProduct.Product);
+  const brand = useSelector((state) => state.GetOneBrand.brand);
+  const [productData, setProduct] = useState([]);
+  const [brandData, setBrand] = useState([]);
+  useEffect(() => {
+    dis(GetProduct(id));
+  }, []);
+  useEffect(() => {
+    if (product.data) {
+      setProduct(product.data);
+      dis(GetOneBr(product?.data?.brand));
     }
-    let itemCate = []
-    if(cate.data){
-        itemCate = cate.data
-    }else{
-        itemCate = []
+  }, [product]);
+  useEffect(() => {
+    if (brand) {
+      setBrand(brand.data);
     }
-    let itemBrand = []
-    if(brand.data){
-        itemBrand = brand.data
-    }else{
-        itemBrand = []
-    }
-    useEffect(()=>{
-        dis(GetProduct(id))
-    },[])
-    useEffect(()=>{
-        dis(GetOnecate(item.category))
-        dis(GetOneBr(item.brand))
-    },[item])
-    return [item ,itemCate,itemBrand]
+  }, [brand]);
+  return [productData, brandData];
 }
 
-export default ProdcutInfoHook
+export default ProdcutInfoHook;

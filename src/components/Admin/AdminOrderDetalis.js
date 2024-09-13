@@ -5,13 +5,12 @@ import UserAllOrderCard from "../User/UserAllOrderCard"
 import { ToastContainer } from 'react-toastify'
 const AdminOrderDetalis = () => {
 const [item,Loading,onPay,load,onDiv] = AdminOrderDetalisHook()
-console.log(item);
     return (
         <Row className='mt-2 flex-row'>
             {
                 Loading === true ? (<h3>جاري التحميل...<Spinner animation="grow" /> </h3>):(
                     <Row>
-            <h3>تفاصيل الطلب رقم#{item?.data?.id}</h3>
+            <h3>تفاصيل الطلب رقم#{item?.data?._id}</h3>
             <Row className="justify-content-center mt-4 bg-white p-3 rounded w-100 mx-0">
             {
                         item?.data?.cartItems ? (item?.data?.cartItems?.map((i,index)=><UserAllOrderCard key={index} item={i}/>)) : null
@@ -84,7 +83,7 @@ console.log(item);
                     المجموع {item?.data?.totalOrderPrice} جنيه
                 </div>
                 <div className='d-flex justify-content-between flex-row'>
-            <div>الحالة :<span className='text-black-50 mx-2'>{item?.data?.isDelivered === true & item?.data?.isDelivered === true ? ("تم الانتهاء "):("قيد التنفيذ")}</span></div>
+            <div>الحالة :<span className='text-black-50 mx-2'>{item?.data?.isDelivered === true && item?.data?.isPaid === true ? ("تم الانتهاء "):("قيد التنفيذ")}</span></div>
             <div>التوصيل :<span className='text-black-50 mx-2'>{item?.data?.isDelivered === true ? ("تم "):("لم يتم")}</span></div>
             <div>الدفع :<span className='text-black-50 mx-2'>{item?.data?.isPaid === true ? ("تم "):("لم يتم")}</span></div>
         </div>

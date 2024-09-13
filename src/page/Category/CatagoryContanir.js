@@ -17,7 +17,7 @@ const [isLoading,cate,colors,page,SetPage] = CatagoryContanirHook()
       }
         </Row>
         {
-          page > 1 ? (<Pagination numberOfPages={page} SetPage={SetPage}/>):null
+          page > 1 ? (<Pagination numberOfPages={page} SetPage={SetPage}page={page}/>):null
         }
         
     </Container>

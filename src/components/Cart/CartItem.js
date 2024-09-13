@@ -2,11 +2,13 @@ import React from 'react'
 import { Col,Modal,Row, Spinner } from 'react-bootstrap'
 import deleteicon from '../../images/delete.png'
 import CartItemHook from '../../logic/cart/CartItemHook'
-function CartItem({item}) {
-  const[count,setCount,Loading,onEdit,loading2,onDeleteItem] = CartItemHook(item)
+function CartItem({item,setCoupon}) {
+  const[count,setCount,Loading,onEdit,loading2,onDeleteItem] = CartItemHook(item,setCoupon)
+  console.log(item);
+  
     return (
         <Col xs="12" className="bg-white rounded p-3 my-2 d-flex px-2">
-        <img width="160px" height="197px" className='m-1 ms-3 rounded' src={`http://localhost:8000/products/${item?.product?.imageCover}`} alt="" />
+        <img width="160px" height="197px" className='m-1 ms-3 rounded' src={item?.product?.imageCover} alt="" />
         <div className="w-100">
           <Row className="justify-content-between">
             <Col sm="12" className=" d-flex flex-row justify-content-between">

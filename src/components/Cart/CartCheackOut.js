@@ -1,10 +1,9 @@
 import React from 'react'
 import { Row, Col, Button, Modal, Spinner } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
 import CartCheackOutHook from '../../logic/cart/CartCheackOutHook'
 
 function CartCheckout({price,couponName,setCouponName,totalPriceAfterCo,load}){
-    const [onDelete,loading,loading2,onCoupon,paymint] =CartCheackOutHook(couponName,price)
+    const [onDelete,loading,loading2,onCoupon,paymint] =CartCheackOutHook(couponName,price,setCouponName)
     return (
         <Row className="my-2 d-flex justify-content-center bg-white p-2 rounded pt-3">
             <Col xs="12" className="d-flex  flex-column  ">

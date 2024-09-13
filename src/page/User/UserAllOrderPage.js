@@ -5,9 +5,7 @@ import UserAllOrderItem from '../../components/User/UserAllOrderItem'
 import UserAllOrderPageHook from '../../logic/user/UserAllOrderPageHook'
 import Pagination from '../../components/utilty/Pagination'
 function UserAllOrderPage() {
-  const [res,Loading,setPage,pagin] =UserAllOrderPageHook()
-  let show;
-  pagin?.numberOfPages >=2 ? show = "block" : show = "none"
+  const [res,Loading,setPage,page,pagin] =UserAllOrderPageHook()
   return (
     <div style={{minHeight:"100vh"}}>
     <Container className='mt-3'>
@@ -19,14 +17,15 @@ function UserAllOrderPage() {
             <h3 className="pb-2 my-2">الطلبات </h3>
             {
               Loading === true  ? (<h3>جاري التحميل...<Spinner animation="grow" /> </h3>) : (
-                res?.data ? (res?.data.map((i,index)=><UserAllOrderItem key={index} item={i}/>)) : (<h3>لا يوجد طلبات </h3>)
+                res?.data?.length >=1 ? (res?.data.map((i,index)=><UserAllOrderItem key={index} item={i}/>)) : (<h3>لا يوجد طلبات </h3>)
               )
             }
             </Col>
         </Row>
-        <div style={{display:show}}>
-        <Pagination numberOfPages={pagin?.numberOfPages} SetPage={setPage}/>
-        </div>
+        {
+          pagin?.numberOfPages >=2 ? <Pagination numberOfPages={pagin?.numberOfPages} SetPage={setPage} page={page}/> : null
+        }
+        
     </Container>
 </div>
   )

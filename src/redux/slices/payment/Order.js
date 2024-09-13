@@ -6,7 +6,7 @@ import useGetCardOrder from '../../../hooks/useGetCardOrder';
 export const PostOrder = createAsyncThunk('Address/PostAddress',async (obj,thunkAPI)=>{
     const {rejectWithValue} = thunkAPI;
     try{
-        const respon = await useInsertData(`/api/v1/orders/${obj.id}`,obj.data);
+        const respon = await useInsertData(`/api/v1/order/${obj.id}`,obj.data);
         return respon
     }catch(err){
         return rejectWithValue(err.response.data) 
@@ -15,13 +15,13 @@ export const PostOrder = createAsyncThunk('Address/PostAddress',async (obj,thunk
 export const GetAdminOrder = createAsyncThunk('Address/GetAdminOrder',async (id,thunkAPI)=>{
     const {rejectWithValue} = thunkAPI;
     try{
-        const respon = await useGetDataByToken(`/api/v1/orders/${id}`);
+        const respon = await useGetDataByToken(`/api/v1/order/${id}`);
         return respon
     }catch(err){
         return rejectWithValue(err.response.data) 
     }
 })
-export const UpdateAdminOrder = createAsyncThunk('Address/PostAddress',async (url,thunkAPI)=>{
+export const UpdateAdminOrder = createAsyncThunk('Address/UpdateAdminOrder',async (url,thunkAPI)=>{
     const {rejectWithValue} = thunkAPI;
     try{
         const respon = await useUpdateData(url);
@@ -30,10 +30,10 @@ export const UpdateAdminOrder = createAsyncThunk('Address/PostAddress',async (ur
         return rejectWithValue(err.response.data) 
     }
 })
-export const GetCardOrder = createAsyncThunk('Address/GetCardOrder',async (id,thunkAPI)=>{
+export const PostCardOrder = createAsyncThunk('Address/PostCardOrder',async (par,thunkAPI)=>{
     const {rejectWithValue} = thunkAPI;
     try{
-        const respon = await useGetCardOrder(`/api/v1/orders/checkout-session/${id}`)
+        const respon = await useInsertData(`/api/v1/order/checkout/session`,par)
         return respon
     }catch(err){
         return rejectWithValue(err.response.data) 
@@ -71,10 +71,9 @@ const OrderSlice = createSlice({
         },[UpdateAdminOrder.fulfilled]:(state,action)=>{
             state.EditData = action.payload
         },
-        [GetCardOrder.rejected]:(state,action)=>{
+        [PostCardOrder.rejected]:(state,action)=>{
             state.CardData = action.payload
-            console.log(action.payload);
-        },[GetCardOrder.fulfilled]:(state,action)=>{
+        },[PostCardOrder.fulfilled]:(state,action)=>{
             state.CardData = action.payload
         },
     }

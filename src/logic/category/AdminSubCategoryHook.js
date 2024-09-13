@@ -11,7 +11,7 @@ function AdminSubCategoryHook() {
     const err = useSelector((state)=>state.PostMySubCategory.error)
     const Loading = useSelector((state)=>state.PostMySubCategory.Loading)
     useEffect(()=>{
-      dis(GetCategory('/api/v1/categories'))
+      dis(GetCategory('/api/v1/category'))
     },[])
     let AddName =(e)=>{
         setName(e)
@@ -43,7 +43,6 @@ function AdminSubCategoryHook() {
             }
         }
     }, [Loading])
-    console.log(err);
     return [cate,Loading,name,id,AddName,AddId,SentData]
 }
 

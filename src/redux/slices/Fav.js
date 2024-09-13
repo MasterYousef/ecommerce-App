@@ -6,7 +6,7 @@ import useGetDataByToken from '../../hooks/useGetDataByToken';
 export const PostFav = createAsyncThunk('fav/PostFav',async (data,thunkAPI)=>{
     const {rejectWithValue} = thunkAPI;
     try{
-        const respon = await useInsertData('/api/v1/wishlist',data);
+        const respon = await useInsertData('/api/v1/user/favoriteList',data);
         return respon
     }catch(err){
         return rejectWithValue(err.response.data) 
@@ -15,7 +15,7 @@ export const PostFav = createAsyncThunk('fav/PostFav',async (data,thunkAPI)=>{
 export const DeleteFav = createAsyncThunk('fav/DeleteFav',async (id,thunkAPI)=>{
     const {rejectWithValue} = thunkAPI;
     try{
-        const respon = await useDeleteData(`api/v1/wishlist/${id}`);
+        const respon = await useDeleteData(`api/v1/user/favoriteList/${id}`);
         return respon
     }catch(err){
         return rejectWithValue(err.response.data) 
@@ -24,7 +24,7 @@ export const DeleteFav = createAsyncThunk('fav/DeleteFav',async (id,thunkAPI)=>{
 export const GetFav = createAsyncThunk('fav/GetFav',async (n,thunkAPI)=>{
     const {rejectWithValue} = thunkAPI;
     try{
-        const respon = await useGetDataByToken("api/v1/wishlist");
+        const respon = await useGetDataByToken("api/v1/user/favoriteList");
         return respon
     }catch(err){
         return rejectWithValue(err.response.data) 

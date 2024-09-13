@@ -9,7 +9,7 @@ function AdminOrderCard({item}) {
         <div className="w-100">
           <Row className="justify-content-between">
             <Col sm="12" className=" d-flex flex-row justify-content-between">
-              <div className="d-inline pt-1 text-black-50">الطلب رقم #{item?.id}</div>
+              <div className="d-inline pt-1 text-black-50">الطلب رقم #{item?._id}</div>
               <div className="d-flex pt-1 ">
               <div className="text-black-50">التاريخ : </div>
                 <span className='mt-1 mx-1'> {item?.createdAt.slice(0,10)} </span>

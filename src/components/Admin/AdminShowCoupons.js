@@ -4,7 +4,7 @@ import AdminCouponsCard from './AdminCouponsCard'
 import AdminShowCouponsHook from '../../logic/admin/AdminShowCouponsHook';
 import Pagination from '../utilty/Pagination'
 function AdminShowCoupons() {
-    const [res,SetPage,Loading] = AdminShowCouponsHook()
+    const [res,SetPage,page,Loading] = AdminShowCouponsHook()
   return (
     <Row className='justify-content-start mt-2'>
             {
@@ -13,7 +13,7 @@ function AdminShowCoupons() {
             }
         {
             res ? (res?.paginationResult?.numberOfPages <=1 ? null :
-                 (<Pagination numberOfPages={res?.paginationResult?.numberOfPages }SetPage={SetPage}/>)) : null
+                 (<Pagination numberOfPages={res?.paginationResult?.numberOfPages }SetPage={SetPage} page={page}/>)) : null
         }
     </Row>
   )

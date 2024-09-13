@@ -38,8 +38,8 @@ function App() {
   const [isUser,isAdmin] = AppHook()
   return (
     <div className='font'>
-      <Navbars/>
       <BrowserRouter>
+      <Navbars/>
       <Routes>
         <Route index element={<HomePage/>}/>
         <Route path='/login' element={<Login/>}/>

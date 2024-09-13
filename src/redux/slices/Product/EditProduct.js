@@ -3,7 +3,7 @@ import {useUpdateDataWithImg} from '../../../hooks/useUpdateData'
 export const EditProduct = createAsyncThunk('Product/EditProduct',async (par,thunkAPI)=>{
     const {rejectWithValue} = thunkAPI;
     try{
-        const respon = await useUpdateDataWithImg(`/api/v1/products/${par.id}`,par.formData);
+        const respon = await useUpdateDataWithImg(`/api/v1/product/${par.id}`,par.formData);
         return respon
     }catch(err){
         return rejectWithValue(err.message)
@@ -28,7 +28,6 @@ const UpdateProduct = createSlice({
         [EditProduct.rejected]:(state,action)=>{
             state.Loading = false;
             state.error = action.payload
-            console.log(state.error)
         }
     }
 })

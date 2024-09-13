@@ -4,7 +4,7 @@ import rate from '../../images/rate.png'
 import ReactStars from "react-rating-stars-component";
 import RateItemHook from '../../logic/product/RateItemHook'
 const RateItem = ({rev,user}) => {
-    const [show,setShow,onsubmit,setting,show2,setShow2,NewCom,setNewCom,onEdit] =RateItemHook()
+    const [show,setShow,onsubmit,setting,show2,setShow2,NewCom,setNewCom,onEdit] =RateItemHook(rev)
     return (
         <div>
             <Row className="mt-1">
@@ -16,7 +16,7 @@ const RateItem = ({rev,user}) => {
             </Row>
             <Row className="border-bottom mx-2 justify-content-between">
                 <Col className="d-felx me-4 pb-4" md={10}>
-                    <div className="rate-description  d-inline ms-2">{rev.review}</div>
+                    <div className="rate-description  d-inline ms-2">{rev.comment}</div>
                 </Col>
                 {
                     user === true ? (<Col className='d-flex justify-content-end'>

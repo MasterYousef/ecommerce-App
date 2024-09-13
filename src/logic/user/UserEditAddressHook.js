@@ -11,7 +11,8 @@ function UserEditAddressHook() {
     const [Loading,setLoading] = useState('')
     const [alias,setAlias] = useState('')
     const [details,setDetails] = useState('')
-    const [phone,setPhone] = useState('')
+    const [city,setCity] = useState('')
+    const [postal,setPostal] = useState('')
     const nav = useNavigate()
     const onSubmit = async()=>{
         if(alias === ''){
@@ -20,7 +21,7 @@ function UserEditAddressHook() {
         }else if(details === ''){
             toast.error("من فضلك ادخل العنوان بالتفصيل")
             return;
-        }else if(phone === '' || phone.length <= 10){
+        }else if(postal === ''){
             toast.error("من فضلك ادخل رقم هاتف مصري صحيح")
             return;
         }else{
@@ -30,7 +31,8 @@ function UserEditAddressHook() {
                 data:{
                     alias,
                     details,
-                    phone
+                    city,
+                    postalCode:postal
                 }
             }
             await dis(UpdateAddress(obj))
@@ -38,14 +40,15 @@ function UserEditAddressHook() {
         }
     }
     useEffect(() => {
-        dis(GetAddress(`/api/v1/addresses/${id}`))
+        dis(GetAddress(`/api/v1/user/userAddresses/${id}`))
     }, [])
     
     useEffect(() => {
         if(res?.data?.data){
             setAlias(res?.data?.data?.alias)
             setDetails(res?.data?.data?.details)
-            setPhone(res?.data?.data?.phone)
+            setPostal(res?.data?.data?.postalCode)
+            setCity(res?.data?.data?.city)
         }
     }, [res])
     useEffect(() => {
@@ -60,8 +63,7 @@ function UserEditAddressHook() {
             }
         }
     }, [Loading])
-    console.log(res);
-    return [alias,setAlias,details,setDetails,phone,setPhone,onSubmit,Loading]
+    return [alias,setAlias,details,setDetails,city,setCity,postal,setPostal,onSubmit,Loading]
 }
 
 export default UserEditAddressHook

@@ -14,7 +14,7 @@ export const SighnUp = createAsyncThunk('Auth/SighnUp',async (data,thunkAPI)=>{
 export const login = createAsyncThunk('Auth/login',async (data,thunkAPI)=>{
     const {rejectWithValue} = thunkAPI;
     try{
-        const respon = await useInsertData('/api/v1/auth/login',data);
+        const respon = await useInsertData('/api/v1/auth/login',data);;
         return respon
     }catch(err){
         return rejectWithValue(err.response.data.message)
@@ -23,7 +23,7 @@ export const login = createAsyncThunk('Auth/login',async (data,thunkAPI)=>{
 export const TokenData = createAsyncThunk('Auth/TokenData',async (url,thunkAPI)=>{
     const {rejectWithValue} = thunkAPI;
     try{
-        const respon = await useGetDataByToken('/api/v1/users/getMe');
+        const respon = await useGetDataByToken('/api/v1/user/getLoggedUser');
         return respon
     }catch(err){
         return rejectWithValue(err.response.data.message)
@@ -53,22 +53,32 @@ export const ResetCode = createAsyncThunk('Auth/ResetCode',async (data,thunkAPI)
         const respon = await useUpdateData('/api/v1/auth/resetPassword',data);
         return respon
     }catch(err){
-        console.log(err.response);
         return rejectWithValue(err.response.data.status)
     }
 })
 const initialState = {
-    SighnUpRes:[],
-    LoginRes:[],
+    SighnUpRes:"",
+    LoginRes:"",
     TokenData:[],
     emailData:[],
     verifyData:[],
     updateData:[],
-    Loading:false,
+    Loading:"",
 }
 const Authentication = createSlice({
     name:'Authentication',
     initialState,
+    reducers: {
+        resetState: (state) => {
+            state.SighnUpRes = "";
+            state.LoginRes = "";
+            state.TokenData = [];
+            state.emailData = [];
+            state.verifyData = [];
+            state.updateData = [];
+            state.Loading = "";
+        },
+    },
     extraReducers:{
         [ResetCode.pending]:(state)=>{
             state.Loading = true;
@@ -80,9 +90,11 @@ const Authentication = createSlice({
         [ResetCode.rejected]:(state,action)=>{
             state.Loading = false;
             state.updateData = action.payload
+            
         },
         [SighnUp.pending]:(state)=>{
             state.Loading = true;
+            state.LoginRes = ""
         },
         [SighnUp.fulfilled]:(state,action)=>{
             state.Loading = false;
@@ -94,6 +106,7 @@ const Authentication = createSlice({
         }
         ,[login.pending]:(state)=>{
             state.Loading = true;
+            state.SighnUpRes = "";
         },
         [login.fulfilled]:(state,action)=>{
             state.Loading = false;
@@ -137,4 +150,5 @@ const Authentication = createSlice({
         }
     }
 })
+export const { resetState } = Authentication.actions;
 export default Authentication.reducer

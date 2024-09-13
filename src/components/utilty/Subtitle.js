@@ -18,7 +18,7 @@ function Subtitle() {
               cateegorys?.length ? (cateegorys.map((e,index)=>{
                 return  <div key={index} className="d-flex mt-3">
                 <input type="checkbox" value={e._id} onClick={(e)=>opHandllerCate(e)} />
-                <div className="filter-sub me-2 ">{e.name}</div>
+                <div className="filter-sub me-2">{e.name}</div>
               </div>
               })):<h4>لا يوجد تصنيفات</h4>
             }

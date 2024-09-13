@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from "react-toastify";
 import { PostCart } from '../../redux/slices/cart/Cart';
@@ -12,7 +12,7 @@ const clickColor=(index,color)=>{
     setColorIndex(index)
     setColor(color)
 }
-const AddCart=async()=>{
+const AddCart=()=>{
     if(localStorage.getItem('token') === null){
         toast.warn("من فضلك سجل الدخول اولا")
         return
@@ -22,8 +22,8 @@ const AddCart=async()=>{
             return
         }else{
             setLoading(true)
-            await dis(PostCart({
-                productId:id,
+             dis(PostCart({
+                product:id,
                 color
             }))
             setLoading(false)
@@ -32,18 +32,14 @@ const AddCart=async()=>{
 }
 useEffect(() => {
 if(loading === false){
-    if(res?.data?.message === "Product added successfully to your cart"){
+    if(res?.data?.message === "product added successfully"){
         toast.success("تم اضافة المنتج الي العربة")
-        localStorage.setItem("cart",res?.data?.numOfCartItems)
-        setTimeout(() => {
-            window.location.reload()
-        }, 1500);
-        
-    }else{
+    }else if(res?.data?.message !== "product added successfully"){
         toast.error("حدث خطاء ما لم يتم اضافة المنتج")
     }
 }
-}, [loading])
+}, [res])
+
 
 return [clickColor,colorIndex,loading,AddCart]
 }

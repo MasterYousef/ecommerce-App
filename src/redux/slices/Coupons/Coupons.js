@@ -41,10 +41,10 @@ export const EditCoupons = createAsyncThunk('Coupons/EditCoupons',async (obj,thu
 })
 const initialState = {
     Loading:'',
+    error:"",
     PostData:[],
     GetRes:[],
     DeleteCop:[],
-    UpDateRes:[]
 }
 const CouponsSlice = createSlice({
     name:'CouponsSlice',
@@ -73,10 +73,10 @@ const CouponsSlice = createSlice({
             state.DeleteCop = action.payload
         },
         [EditCoupons.fulfilled]:(state,action)=>{
-            state.UpDateRes = action.payload
+            state.error = false
         },
         [EditCoupons.rejected]:(state,action)=>{
-            state.UpDateRes = action.payload
+            state.error = true
         }
     }
 })

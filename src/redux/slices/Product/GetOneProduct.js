@@ -3,7 +3,7 @@ import useGetData from '../../../hooks/useGetData'
 export const GetProduct = createAsyncThunk('Product/GetProduct',async (id,thunkAPI)=>{
     const {rejectWithValue} = thunkAPI;
     try{
-        const respon = await useGetData(`/api/v1/products/${id}`);
+        const respon = await useGetData(`/api/v1/product/${id}`);
         return respon.data
     }catch(err){
         return rejectWithValue(err.message)

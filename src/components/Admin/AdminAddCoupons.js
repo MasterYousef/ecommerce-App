@@ -5,7 +5,6 @@ import AdminAddCouponsHook from '../../logic/admin/AdminAddCouponsHook';
 function AdminAddCoupons() {
     const ref = useRef();
     const [name,expire,discount,setName,setExpire,setDiscount,onSubmit,Loading] = AdminAddCouponsHook()
-    console.log(Loading);
   return (
     <div className='mt-2'>
         <h3>اضافة كوبون</h3>
@@ -17,7 +16,7 @@ function AdminAddCoupons() {
                  value={expire}
                   onChange={(e)=>setExpire(e.target.value)}
                  onFocus={() => (ref.current.type = "date")}/>
-        <Form.Control type="number" placeholder="نسبة الخصم" className='my-2 text-center' value={discount} onChange={(e)=>setDiscount(e.target.value)}/>
+        <Form.Control type="number" max={100} min={1} placeholder="نسبة الخصم" className='my-2 text-center' value={discount} onChange={(e)=>setDiscount(e.target.value)}/>
         <Button className='w-100' variant='dark' onClick={onSubmit}>اضافة الكوبون</Button>
         </Form.Group>
         </Row>

@@ -40,7 +40,6 @@ if(Loading === false){
         setTimeout(()=>navti('/login'),3000)
     }
 }
-console.log(res)
 }, [Loading])
     return [newPassword ,conPassword,onChangePassword,onChangeConPassword,onesubmit,Loading]
 }

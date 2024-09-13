@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { PostCoupons } from '../../redux/slices/Coupons/Coupons';
+import { GetCoupons, PostCoupons } from '../../redux/slices/Coupons/Coupons';
 function AdminAddCouponsHook() {
     const dis = useDispatch()
     const res = useSelector((state)=>state.CouponsSlice.PostData)
@@ -29,11 +29,11 @@ function AdminAddCouponsHook() {
                 setName('')
                 setExpire('')
                 setDiscount('')
-            }else if(res.status === 'fail'){
+                dis(GetCoupons())
+            }else{
                 toast.error('خطاء تأكد من بيانات الكوبون ')
             }
         }
-      console.log(res);
     }, [Loading])
     
     return [name,expire,discount,setName,setExpire,setDiscount,onSubmit,Loading]

@@ -1,9 +1,9 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { Button, Form, Modal, Row, Spinner } from 'react-bootstrap';
 import Zoom from 'react-reveal/Zoom';
 import AdminCouponsCardHook from '../../logic/admin/AdminCouponsCardHook';
 function AdminCouponsCard({item}) {
-    const [Loading1,show,setShow,onDelete,show2,setShow2,Loading2,name,setName,setExpire,discount,setDiscount,onSubmit] =AdminCouponsCardHook(item)
+    const [Loading1,show,setShow,onDelete,show2,setShow2,Loading2,name,setName,expire,setExpire,discount,setDiscount,onSubmit] =AdminCouponsCardHook(item)
   return (
     <div>
     <Zoom>
@@ -11,7 +11,7 @@ function AdminCouponsCard({item}) {
         <div>
             <p>الاسم :  {item.name} </p>
             <p>نسبة الخصم : {item.discount}%</p>
-            <p className='my-dir'>تاريخ الانتهاء : {item.expire.replace('T00:00:00.000Z',"")}</p>
+            <p>تاريخ الانتهاء : {item.expire.replace('T00:00:00.000Z',"")}</p>
         </div>
         <div>
         <i className="fa-solid fa-trash mx-2 cur" onClick={()=>setShow(true)}></i>
@@ -49,6 +49,7 @@ function AdminCouponsCard({item}) {
         <Form.Group className="mb-3 w-75" controlId="formBasicEmail">
         <Form.Control type="text" placeholder="الاسم" className='my-2 text-center' value={name} onChange={(e)=>setName(e.target.value)}/>
         <Form.Control type="date" placeholder="تاريخ الانتهاء" className='my-2 text-center'
+        defaultValue={expire.replace('T00:00:00.000Z',"")}
                   onChange={(e)=>setExpire(e.target.value)}/>
         <Form.Control type="number" placeholder="نسبة الخصم" className='my-2 text-center' value={discount} onChange={(e)=>setDiscount(e.target.value)}/>
         </Form.Group>

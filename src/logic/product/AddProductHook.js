@@ -30,7 +30,7 @@ function AddProductHook() {
     }
     const SubCategory= async(e)=>{
         if(e !== '0'){
-            await dispatch(GetSubCategory(`/api/v1/categories/${e}/subcategories`))
+            await dispatch(GetSubCategory(`/api/v1/category/${e}/subCategory`))
         }
     setCatId(e)
     }
@@ -52,8 +52,8 @@ function AddProductHook() {
         }
     },[catId])
     useEffect(()=>{
-        dispatch(GetCategory('/api/v1/categories'))
-        dispatch(GetAllBrand('/api/v1/brands'))
+        dispatch(GetCategory('/api/v1/category'))
+        dispatch(GetAllBrand('/api/v1/brand'))
     },[])
     function dataURLtoFile(dataurl, filename) {
         var arr = dataurl.split(','),
@@ -69,12 +69,20 @@ function AddProductHook() {
     const sendData =()=>{
         if(name === '' || disc === '' || qty === '' || salBefore === '' ||images[0] === undefined|| catId === "0" || BrandId === "0"){ 
             toast.warn('من فضلك ادخل جميع البيانات')
-        }else{
+        }else if(Colors.length <= 0){
+            toast.warn('من فضلك اختر لون')
+        }else if((salBefore * 1) <= (salAfter * 1)){
+            toast.warn(' من فضلك ادخل سعر قبل الخصم اكبر من سعر بعد الخصم')
+        }
+        else{
             const imageCover = dataURLtoFile(images[0],Math.random() + ".png")
             const info = new FormData();
             const ItemImages =Array.from(Array(Object.keys(images)?.length).keys())?.map((e)=>{
                 return dataURLtoFile(images[e],Math.random() + ".png")
             });
+            if(salAfter !== 0 && salAfter !== ""){
+            info.append('priceAfterDiscount',salAfter)
+            }
             info.append('title',name)
             info.append('description',disc)
             info.append('quantity',qty)
@@ -82,18 +90,17 @@ function AddProductHook() {
             info.append('imageCover',imageCover)
             info.append('category',catId)
             info.append('brand',BrandId)
-            Colors.map((color)=> info.append('availableColors',color))
+            Colors.map((color)=> info.append('colors',color))
             ItemImages.map((i)=>info.append('images',i))
-            selectSub.map((s)=>info.append('subcategory',s._id))
+            selectSub.map((s)=>info.append('subcategories',s._id))
             dispatch(PostProduct(info))
-            console.log(err)
         }
     }
     useEffect(()=>{
         if(loading === false){
-            if(err !== false){
+            if(err === true){
                 toast.error('حدث خطاء اثناء الاضافة ')
-            }else{
+            }else if(err === false){
                 toast.success('تم الاضافة بنجاح')
                 setname('')
                 setBrandId('')

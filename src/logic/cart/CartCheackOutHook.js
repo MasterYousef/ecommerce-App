@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from 'react-redux'
-import { CartCoupon, DeleteCart } from '../../redux/slices/cart/Cart';
+import { CartCoupon, DeleteCart, GetCart } from '../../redux/slices/cart/Cart';
 import {useNavigate} from 'react-router-dom'
-function CartCheackOutHook(couponName,price) {
+function CartCheackOutHook(couponName,price,setCouponName) {
 const dis=useDispatch()
 const res = useSelector(state=>state.CartSlice.DeleteData)
 const couponRes = useSelector(state=>state.CartSlice.CartCouponData)
 const [loading, setLoading] = useState("")
 const [loading2, setLoading2] = useState("")
 const navti = useNavigate()
-const onDelete = async()=>{
+const onDelete = ()=>{
     setLoading(true)
-    await dis(DeleteCart())
+     dis(DeleteCart())
     setLoading(false)
 }
-const onCoupon = async()=>{
+const onCoupon = ()=>{
     setLoading2(true)
-    await dis(CartCoupon({
-        couponName
+     dis(CartCoupon({
+        coupon:couponName
     }))
     setLoading2(false)
 }
@@ -35,26 +35,23 @@ if(loading === false){
     if(res.status === 204){
         toast.success("تم حذف العربة بنجاح")
         localStorage.removeItem('cart')
-        setTimeout(() => {
-            window.location.reload()
-        }, 1500);
+        setCouponName("")
+        dis(GetCart());
     }else{
         toast.error("لم يتم حذف محتويات العربة")
     }
 }
-}, [loading])
+}, [res])
 useEffect(() => {
     if(loading2 === false){
         if(couponRes?.data?.status === "success"){
             toast.success("تم تطبيق الخصم بنجاح")
-            setTimeout(() => {
-                window.location.reload()
-            }, 1500);
-        }else{
+            dis(GetCart())
+        }else if(couponRes?.data?.status !== "success"){
             toast.error("حدث خطاء ما لم يتم تطبيق الكوبون")
         }
     }
-    }, [loading2])
+    }, [couponRes])
 return [onDelete,loading,loading2,onCoupon,paymint]
 }
 

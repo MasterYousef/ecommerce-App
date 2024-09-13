@@ -6,7 +6,7 @@ import {useUpdateData} from '../../../hooks/useUpdateData'
 export const PostAddress = createAsyncThunk('Address/PostAddress',async (data,thunkAPI)=>{
     const {rejectWithValue} = thunkAPI;
     try{
-        const respon = await useInsertData("/api/v1/addresses",data);
+        const respon = await useInsertData("/api/v1/user/userAddresses",data);
         return respon
     }catch(err){
         return rejectWithValue(err.response.data) 
@@ -24,7 +24,7 @@ export const GetAddress = createAsyncThunk('Address/GetAddress',async (url,thunk
 export const DeleteAddress = createAsyncThunk('Address/DeleteAddress',async (id,thunkAPI)=>{
     const {rejectWithValue} = thunkAPI;
     try{
-        const respon = await useDeleteData(`/api/v1/addresses/${id}`);
+        const respon = await useDeleteData(`/api/v1/user/userAddresses/${id}`);
         return respon
     }catch(err){
         return rejectWithValue(err.response.data) 
@@ -33,7 +33,7 @@ export const DeleteAddress = createAsyncThunk('Address/DeleteAddress',async (id,
 export const UpdateAddress = createAsyncThunk('Address/UpdateAddress',async (obj,thunkAPI)=>{
     const {rejectWithValue} = thunkAPI;
     try{
-        const respon = await useUpdateData(`/api/v1/addresses/${obj.id}`,obj.data);
+        const respon = await useUpdateData(`/api/v1/user/userAddresses/${obj.id}`,obj.data);
         return respon
     }catch(err){
         return rejectWithValue(err.response.data) 

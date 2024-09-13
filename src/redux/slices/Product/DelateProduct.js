@@ -3,7 +3,7 @@ import useDeleteData from '../../../hooks/useDeleteData'
 export const DelateProduct = createAsyncThunk('Product/DelateProduct',async (id,thunkAPI)=>{
     const {rejectWithValue} = thunkAPI;
     try{
-        const respon = await useDeleteData(`/api/v1/products/${id}`);
+        const respon = await useDeleteData(`/api/v1/product/${id}`);
         return respon.data
     }catch(err){
         return rejectWithValue(err.message)
@@ -11,7 +11,7 @@ export const DelateProduct = createAsyncThunk('Product/DelateProduct',async (id,
 
 })
 const initialState = {
-    Loading:true,
+    Loading:"",
     error:''
 }
 const DelateOneProduct = createSlice({
@@ -23,10 +23,11 @@ const DelateOneProduct = createSlice({
         },
         [DelateProduct.fulfilled]:(state,action)=>{
             state.Loading = false;
+            state.error = false
         },
         [DelateProduct.rejected]:(state,action)=>{
             state.Loading = false;
-            state.error = action.payload
+            state.error = true            
         }
     }
 })

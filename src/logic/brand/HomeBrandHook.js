@@ -6,7 +6,7 @@ function HomeBrandHook() {
     const isLoading = useSelector((state)=>state.GetMyBrand.loading);
     const dis = useDispatch();
     useEffect(()=>{
-      dis(GetAllBrand('/api/v1/brands'))
+      dis(GetAllBrand('/api/v1/brand'))
     },[])
     return [isLoading,brand]
 }

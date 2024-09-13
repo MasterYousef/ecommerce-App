@@ -10,7 +10,7 @@ function Login() {
       <Form className='mform'>
         <h2>تسجيل الدخول</h2>
       <Form.Group className="mb-2" >
-        <Form.Control type="email" placeholder="البريد الالكتروني " className='mb-2' value={email} onChange={onChangeEmail}/>
+        <Form.Control type="email" autoComplete='email' placeholder="البريد الالكتروني " className='mb-2' value={email} onChange={onChangeEmail}/>
         <Form.Control type="password" placeholder="كلمة السر"  className='mb-2' value={password} onChange={onChangePassword}/>
       </Form.Group>
         <Link to='/forget-password' style={{textDecoration:'none'}}>

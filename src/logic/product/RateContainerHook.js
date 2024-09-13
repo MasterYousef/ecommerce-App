@@ -8,7 +8,7 @@ const {id} = useParams();
 const res = useSelector(state=>state.RateSlice.GetRes);
 const dis = useDispatch()
 const [page,setPage] = useState()
-let user;
+let user = null
 if(localStorage.getItem('user')!== null){
      user = JSON.parse(localStorage.getItem('user'))
 }
@@ -23,6 +23,6 @@ const getrevo =async()=>{
 useEffect(() => {
     getrevo()
 }, [page])
-return [res?.data,setPage,user]
+return [res?.data,setPage,page,user]
 }
 export default RateContainerHook

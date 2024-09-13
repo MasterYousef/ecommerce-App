@@ -12,7 +12,7 @@ function AdminEditProduct() {
     const  [images , setImages ,name ,setname , disc ,setDisc , salBefore 
         ,setSalBefore , salAfter , setSalAfter ,qty ,setQty ,catId ,SubCategory,
         cate,options ,onSelect,onRemove,BrandId,setBrandId,brand,Colors,DelateColors
-        ,ShowColor,handelColor,setShowColor,sendData,loading
+        ,ShowColor,handelColor,setShowColor,sendData,loading,selectSub
     ] = AdminEditProductHook(id)
   return (
     <div>
@@ -80,7 +80,7 @@ function AdminEditProduct() {
                         className="mt-2 in-con text-end"
                         placeholder="التصنيف الفرعي"
                         options={options}
-                        value={options}
+                        selectedValues={selectSub}
                         onSelect={onSelect}
                         onRemove={onRemove}
                         displayValue="name"

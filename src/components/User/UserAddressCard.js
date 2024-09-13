@@ -22,10 +22,15 @@ function UserAddressCard({item}) {
                     <div className='text-black-50'>{item.details}</div>
                 </Col>
             </Row>
+            <Row className='mt-3'>
+                <Col xs="12">
+                    <div className='text-black-50'>{item.city}</div>
+                </Col>
+            </Row>
             <Row className="mt-3">
                 <Col xs="12" className="d-flex">
-                    <div>رقم الهاتف:</div>
-                    <div className="mx-2 text-black-50">{item.phone}</div>
+                    <div>الرمز البريدي :</div>
+                    <div className="mx-2 text-black-50">{item.postalCode}</div>
                 </Col>
             </Row>
             <Modal show={show} onHide={()=>setShow(false)}>

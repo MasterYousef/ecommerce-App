@@ -3,7 +3,7 @@ import {useInsertData} from '../../../hooks/useInsertData'
 export const PostSubCategory = createAsyncThunk('category/PostSubCategory',async (RowData,thunkAPI)=>{
     const {rejectWithValue} = thunkAPI;
     try{
-        const respon = await useInsertData('/api/v1/subcategories',RowData);
+        const respon = await useInsertData('/api/v1/subCategory',RowData);
         return respon
     }catch(err){
         return rejectWithValue(err.response.data.status)

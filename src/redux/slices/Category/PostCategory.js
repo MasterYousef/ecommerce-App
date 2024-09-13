@@ -3,7 +3,7 @@ import {useInsertDataWithImg} from '../../../hooks/useInsertData'
 export const PostCategory = createAsyncThunk('category/PostCategory',async (FormData,thunkAPI)=>{
     const {rejectWithValue} = thunkAPI;
     try{
-        const respon = await useInsertDataWithImg('/api/v1/categories',FormData);
+        const respon = await useInsertDataWithImg('/api/v1/category',FormData);
         return respon
     }catch(err){
         return rejectWithValue(err.response.data.status)

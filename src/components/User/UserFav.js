@@ -12,7 +12,7 @@ function UserFav() {
         <h3 className="pb-2 my-2">المنتجات المفضلة</h3>
         {
         Loading === false ? (
-          favArray ? (favArray?.map((e,index)=> <ProductCard item={e} favId={favId}/>)) : <h2>لا توجد منتجات مفضلة</h2>
+          favArray.length >=1 ? (favArray?.map((e,index)=> <ProductCard item={e} favId={favId}/>)) : <h2>لا توجد منتجات مفضلة</h2>
         ) : <h1>جاري التحميل...<Spinner animation="grow" /></h1>
       }
     </Row>

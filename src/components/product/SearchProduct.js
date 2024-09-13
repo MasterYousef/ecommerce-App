@@ -8,7 +8,7 @@ import SearchProductHook from '../../logic/product/SearchProductHook'
 import ProductCard from './ProductCard'
 import GetFavProductHook from '../../logic/product/GetFavProductHook'
 const SearchProduct = () => {
-  const [items,,,num,PaginationNum,SetPage,Sorting] = SearchProductHook()
+  const [items,,,num,PaginationNum,SetPage,page,Sorting] = SearchProductHook()
   const [favId] = GetFavProductHook()
   return (
     <div style={{minHeight:"80vh"}} className=' pb-5'>
@@ -22,14 +22,14 @@ const SearchProduct = () => {
             <Col sm='9' xs='9' md='10'>
               <Row>
               {
-          items ? (items.map((i,index)=>{
+          items?.length > 0 ? (items.map((i,index)=>{
               return <ProductCard key={index} item={i} favId={favId}/>
-          })) : null
+          })) : <h2>لا يوجد منتجات</h2>
             }
               </Row>
             </Col>
         </Row>
-        <Pagination numberOfPages={PaginationNum} SetPage={SetPage}/>
+        <Pagination numberOfPages={PaginationNum} SetPage={SetPage}page={page}/>
         </Container>
     </div>
   )

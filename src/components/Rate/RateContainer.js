@@ -6,7 +6,7 @@ import Pagination from '../utilty/Pagination'
 import RatePost from './RatePost'
 import RateContainerHook from '../../logic/product/RateContainerHook'
 function RateContainer({item}) {
-  const [res,setPage,user] = RateContainerHook()
+  const [res,setPage,page,user] = RateContainerHook()
   return (
     <Container className='bg-white rounded'>
         <Row>
@@ -19,7 +19,7 @@ function RateContainer({item}) {
             </Col>
         </Row>
         {
-          localStorage.getItem('user') !== null ? (<RatePost/>) : (<h3 className='border-bottom pb-3 me-2 px-4'>سجل دخولك لاضافة تقييم للمنتج</h3>)
+          user !== null ? (user?.role === "user" ? <RatePost/> : <h3 className='border-bottom pb-3 me-2 px-4'>غير مسموح للمشرفين بالتعليق</h3>) : (<h3 className='border-bottom pb-3 me-2 px-4'>سجل دخولك لاضافة تقييم للمنتج</h3>)
         }
         {
           res?.data ? (res.data.map((e)=>
@@ -28,7 +28,7 @@ function RateContainer({item}) {
         }
         {
           res?.paginationResult ? (res.paginationResult.numberOfPages <= 1 ? null : (
-          <Pagination SetPage={setPage} numberOfPages={res.paginationResult.numberOfPages}/>)) : null
+          <Pagination SetPage={setPage} numberOfPages={res.paginationResult.numberOfPages}page={page}/>)) : null
         }
         
     </Container>

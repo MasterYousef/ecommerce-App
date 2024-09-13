@@ -6,12 +6,13 @@ import UserAddressHook from '../../logic/user/UserAddressHook'
 
 function UserAddress() {
   const [items,Loading] = UserAddressHook()
+  
   return (
     <Row>
       <h3 className="pb-2 my-2">العناوين</h3>
       {
         Loading === true ? (<h3>جاري التحميل...<Spinner animation="grow" /> </h3> ) : (
-          items?.data?.length ? (items?.data?.map((e,index)=><UserAddressCard key={index} item={e}/>)):<h3>لا يوجد عناوين</h3>
+          items?.addresses?.length ? (items?.addresses?.map((e,index)=><UserAddressCard key={index} item={e}/>)):<h3>لا يوجد عناوين</h3>
         )
       }
         <Link to='/user/add-address' style={{ textDecoration: "none",color:'black' }}>

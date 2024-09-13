@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {GetCoupons} from '../../redux/slices/Coupons/Coupons'
 function AdminShowCouponsHook() {
@@ -13,8 +13,8 @@ function AdminShowCouponsHook() {
     }
     useEffect(() => {
         val()
-    }, [res])
-    return [res?.data,SetPage,Loading]
+    }, [page])
+    return [res?.data,SetPage,page,Loading]
 }
 
 export default AdminShowCouponsHook

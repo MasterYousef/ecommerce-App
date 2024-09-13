@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import offh from "../../images/fav-off.png"
 import star from "../../images/rate.png"
 import AdminProductCardHook from "../../logic/admin/AdminProductCardHook"
-import { ToastContainer } from 'react-toastify'
 function AdminProductCard({item}) {
 const [show,handleClose,handleShow,handelRemove] = AdminProductCardHook()
   return (
@@ -46,7 +45,6 @@ const [show,handleClose,handleShow,handelRemove] = AdminProductCardHook()
           </Button>
         </Modal.Footer>
       </Modal>
-      <ToastContainer/>
     </Col>
   )
 }
