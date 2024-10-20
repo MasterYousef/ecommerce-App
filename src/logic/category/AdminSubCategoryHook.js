@@ -42,7 +42,7 @@ function AdminSubCategoryHook() {
                 toast.success('تم الاضافة بنجاح')
             }
         }
-    }, [Loading])
+    }, [Loading,err])
     return [cate,Loading,name,id,AddName,AddId,SentData]
 }
 

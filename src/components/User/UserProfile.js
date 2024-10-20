@@ -27,7 +27,6 @@ function UserProfile() {
   return (
     <div>
       <h3 className="my-2">الصفحه الشخصية</h3>
-
       <div className=" card  my-3 px-2 w-100">
         <Row className="d-flex justify-content-between pt-2">
           <Col xs="6" className="d-flex align-items-center">

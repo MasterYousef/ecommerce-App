@@ -26,7 +26,7 @@ useEffect(() => {
 if(Loading === false){
     if(res === 'fail' || res === 'error'){
         toast.error('الرمز الذي ادخلته غير صحيح او انتهت صلاحيته')
-    }else if(res.data?.status === 'Success'){
+    }else if(res.data?.status === 'success'){
         toast.success('تمت العملية بنجاح')
         setTimeout(()=>navti('/reset-password'),3000)
     }

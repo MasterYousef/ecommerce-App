@@ -11,15 +11,15 @@ const SearchProduct = () => {
   const [items,,,num,PaginationNum,SetPage,page,Sorting] = SearchProductHook()
   const [favId] = GetFavProductHook()
   return (
-    <div style={{minHeight:"80vh"}} className=' pb-5'>
+    <div style={{minHeight:"90vh"}} className=' pb-5 overflow-hidden'>
         <CatagoryHeader/>
         <Container>
         <Details title={num} Sorting={Sorting}/>
         <Row className=''>
-            <Col sm='3' xs='3' md='2'>
+            <Col sm='3' xs='4' md='2'>
                 <Subtitle/>
             </Col>
-            <Col sm='9' xs='9' md='10'>
+            <Col sm='9' xs='8' md='10'>
               <Row>
               {
           items?.length > 0 ? (items.map((i,index)=>{

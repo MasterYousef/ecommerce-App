@@ -27,7 +27,8 @@ function ResetPassHook() {
         }else{
             await dis(ResetCode({
                 email:localStorage.getItem('reset-email'),
-                newPassword
+                newPassword,
+                newPasswordConfirm:conPassword
             }))
         }
     }
@@ -35,7 +36,7 @@ useEffect(() => {
 if(Loading === false){
     if(res === 'fail' || res === 'error'){
         toast.error('حدث خطاء ما الرجاء المحاولة مرة اخرى لاحقا')
-    }else if(res.data){
+    }else if(res?.data){
         toast.success('تم تغيير كلمة السر بنجاح')
         setTimeout(()=>navti('/login'),3000)
     }

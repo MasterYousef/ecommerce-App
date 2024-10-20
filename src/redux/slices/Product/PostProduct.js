@@ -6,8 +6,6 @@ export const PostProduct = createAsyncThunk('Product/PostProduct',async (FormDat
         const respon = await useInsertDataWithImg('/api/v1/product',FormData);
         return respon
     }catch(err){
-        console.log(err);
-        
         return rejectWithValue(err.message)
     }
 

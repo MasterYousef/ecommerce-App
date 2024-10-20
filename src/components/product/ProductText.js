@@ -17,7 +17,6 @@ const ProductText = () => {
       </div>
     );
   } else {
-
     return (
       <div>
         <Row className="mt-2">
@@ -41,13 +40,22 @@ const ProductText = () => {
           </Col>
         </Row>
         <Row>
-          <Col md="8" className="mt-1 d-flex">
+          <Col md="8" className="mt-4">
+            <div className="cat-text d-inline">التصنيفات الفرعية :</div>
+            <div className="barnd-text d-inline mx-2">{item?.subcategories?.length >= 1 ? item?.subcategories?.map((e)=>{
+              return e.name
+            }):<span>لا يوجد تصنيفات فرعية</span>} </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col md="8" className="mt-4 d-flex">
+          الالوان  :
             {item?.colors ? (
               item.colors.map((c, index) => {
                 return (
                   <div
                     key={index}
-                    className="color ms-2 cur"
+                    className="color mx-2 cur"
                     onClick={() => clickColor(index, c)}
                     style={{
                       backgroundColor: c,
@@ -68,9 +76,8 @@ const ProductText = () => {
         </Row>
         <Row className="mt-2">
           <Col md="8">
-            <div className="product-description d-inline">
-              {" "}
-              {item.description}{" "}
+            <div className="lh-lg d-inline">
+              {item.description}
             </div>
           </Col>
         </Row>

@@ -22,7 +22,7 @@ function CartItemHook(item,setCoupon) {
     await dis(DeleteOneCart(obj));
     setLoading2(false);
   };
-  const onEdit = () => {
+  const onEdit = async() => {
     if (count === item?.quantity) {
       toast.warn("من فضلك غير الكمية ");
       return;
@@ -32,7 +32,7 @@ function CartItemHook(item,setCoupon) {
         id: item?.product?.id,
         par: { quantity: count, color: item?.color },
       };
-      dis(UpdateCart(obj));
+      await dis(UpdateCart(obj));
       setLoading(false);
     }
   };
@@ -56,7 +56,7 @@ function CartItemHook(item,setCoupon) {
         toast.error("لم يتم حذف المنتج من العربة");
       }
     }
-  }, [loading2]);
+  }, [DeleteRes,loading2]);
   return [count, setCount, Loading, onEdit, loading2, onDeleteItem];
 }
 

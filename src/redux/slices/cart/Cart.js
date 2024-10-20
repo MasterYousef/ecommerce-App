@@ -22,7 +22,6 @@ export const GetCart = createAsyncThunk("cart/GetCart", async (n, thunkAPI) => {
     const respon = await useGetDataByToken("/api/v1/cart");
     return respon;
   } catch (err) {
-    console.log(err);
     return rejectWithValue(err.response.data);
   }
 });
@@ -111,6 +110,8 @@ const CartSlice = createSlice({
     [GetCart.rejected]: (state, action) => {
       state.GetData = action.payload;
       state.Loading = false;
+      state.numOfCartItems = "deleted"
+      localStorage.setItem("cart", 0);
     },
     [UpdateCart.fulfilled]: (state, action) => {
       state.UpdateData = action.payload;

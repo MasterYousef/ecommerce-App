@@ -11,9 +11,9 @@ import HomeBrand from '../../components/Home/HomeBrand'
       <HomeSlider/>
       <Container>
         <HomeCategory/>
-        <ProductContainer  path="Search" title='المنتجات' titleButton='المزيد'/>
+        <ProductContainer path="Search" title='المنتجات' titleButton='المزيد'/>
         <Discount/>
-        <ProductContainer  path="Search" title='العروض' titleButton='المزيد'/>
+        <ProductContainer path="Search" title='العروض' titleButton='المزيد' Discount={true}/>
         <HomeBrand/>
       </Container>
     </>

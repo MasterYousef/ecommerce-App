@@ -53,7 +53,7 @@ function AddProductHook() {
     },[catId])
     useEffect(()=>{
         dispatch(GetCategory('/api/v1/category'))
-        dispatch(GetAllBrand('/api/v1/brand'))
+        dispatch(GetAllBrand('/api/v1/brand?limit=20'))
     },[])
     function dataURLtoFile(dataurl, filename) {
         var arr = dataurl.split(','),

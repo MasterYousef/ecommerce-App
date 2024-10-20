@@ -8,7 +8,7 @@ import RateContainerHook from '../../logic/product/RateContainerHook'
 function RateContainer({item}) {
   const [res,setPage,page,user] = RateContainerHook()
   return (
-    <Container className='bg-white rounded'>
+    <Container className='bg-white rounded overflow-hidden'>
         <Row>
             <Col className="d-flex">
                 <div className="sub-tile d-inline p-1 ">التقيمات</div>

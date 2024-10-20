@@ -12,7 +12,7 @@ const clickColor=(index,color)=>{
     setColorIndex(index)
     setColor(color)
 }
-const AddCart=()=>{
+const AddCart=async()=>{
     if(localStorage.getItem('token') === null){
         toast.warn("من فضلك سجل الدخول اولا")
         return
@@ -22,7 +22,7 @@ const AddCart=()=>{
             return
         }else{
             setLoading(true)
-             dis(PostCart({
+            await dis(PostCart({
                 product:id,
                 color
             }))
@@ -38,7 +38,7 @@ if(loading === false){
         toast.error("حدث خطاء ما لم يتم اضافة المنتج")
     }
 }
-}, [res])
+}, [res,loading])
 
 
 return [clickColor,colorIndex,loading,AddCart]

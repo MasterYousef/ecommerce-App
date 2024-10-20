@@ -3,6 +3,8 @@ import ReactPaginate from "react-paginate";
 function Pagination({ numberOfPages, SetPage ,page}) {
   let handlePageClick = (data) => {
     SetPage(data.selected + 1);
+    console.log(data);
+    
   };
   return (
     <>
@@ -11,7 +13,7 @@ function Pagination({ numberOfPages, SetPage ,page}) {
         nextLabel="التالي"
         onPageChange={handlePageClick}
         marginPagesDisplayed={2}
-        forcePage={page-1}
+        forcePage={0}
         pageRangeDisplayed={3}
         pageCount={numberOfPages}
         previousLabel="السابق"

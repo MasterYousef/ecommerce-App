@@ -41,7 +41,7 @@ function PymentChoose() {
             </Col>
         </Row>
         <Row>
-            <select className='w-25' placeholder='اختر العنوان' name='Adrress' value={option} onChange={(e)=>setOption(e.target.value)}>
+            <select className='w-auto' placeholder='اختر العنوان' name='Adrress' value={option} onChange={(e)=>setOption(e.target.value)}>
             <option value="0">اختر العنوان  </option>
             {
                 res?.addresses ? (res?.addresses.map((e,index)=><option key={index} value={index+1}>{e?.alias}</option>)):null
@@ -53,20 +53,13 @@ function PymentChoose() {
     <Row>
         <Col xs="12" className="d-flex justify-content-end">
             <div className="p-2 bg-white px-4 rounded border">{
-                price === undefined? ("...") : (`${price} جنية`)
+                price === "0" ? ("...") : (`${price} جنية`)
             }</div>
             <div className="my-btn px-3 pt-2 h-100 bg-dark text-white me-2" onClick={onSubmit}> اتمام الشراء</div>
         </Col>
     </Row>
     <Modal
-        show={loading}
-        dialogClassName="modal-90w"
-        aria-labelledby="example-custom-modal-styling-title"
-      >
-        <Modal.Body><h1>جاري التحميل...<Spinner animation="grow" /> </h1> </Modal.Body>
-      </Modal>
-      <Modal
-        show={loading2}
+        show={loading || loading2}
         dialogClassName="modal-90w"
         aria-labelledby="example-custom-modal-styling-title"
       >

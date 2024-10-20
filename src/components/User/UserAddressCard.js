@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify';
 function UserAddressCard({item}) {
     const [Loading,show,setShow,onDelete] = UserAddressCardHook()
   return (
-<div className="card my-3 py-1 px-2">
+<div className="card my-3 py-1 px-2 w-100">
             <Row className="justify-content-between">
                     <div className="p-2 w-50">{item.alias}</div>
                     <div className="p-2 w-50 d-flex justify-content-end align-items-center">

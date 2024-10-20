@@ -4,8 +4,6 @@ import deleteicon from '../../images/delete.png'
 import CartItemHook from '../../logic/cart/CartItemHook'
 function CartItem({item,setCoupon}) {
   const[count,setCount,Loading,onEdit,loading2,onDeleteItem] = CartItemHook(item,setCoupon)
-  console.log(item);
-  
     return (
         <Col xs="12" className="bg-white rounded p-3 my-2 d-flex px-2">
         <img width="160px" height="197px" className='m-1 ms-3 rounded' src={item?.product?.imageCover} alt="" />
@@ -37,7 +35,6 @@ function CartItem({item,setCoupon}) {
                 style={{ backgroundColor: item.color }}></div>
             </Col>
           </Row>
-  
           <Row className="justify-content-between">
             <Col sm="12" className=" d-flex flex-row justify-content-between">
               <div className="d-inline pt-2 d-flex">
@@ -56,14 +53,7 @@ function CartItem({item,setCoupon}) {
           </Row>
         </div>
         <Modal
-        show={Loading}
-        dialogClassName="modal-90w"
-        aria-labelledby="example-custom-modal-styling-title"
-      >
-        <Modal.Body><h1>جاري التحميل...<Spinner animation="grow" /> </h1> </Modal.Body>
-      </Modal>
-      <Modal
-        show={loading2}
+        show={Loading||loading2}
         dialogClassName="modal-90w"
         aria-labelledby="example-custom-modal-styling-title"
       >

@@ -3,52 +3,48 @@ import Carousel from 'react-bootstrap/Carousel';
 import slider1 from '../../images/slider1.png'
 import slider2 from '../../images/slider2.png'
 import slider3 from '../../images/slider3.png'
+
 function HomeSlider() {
   const [index, setIndex] = useState(0);
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
+  const bgColors = ['#FFC300', '#DAF7A6', '#FF5733'];
+  const slideContent = [
+    {
+      title: "New Arrivals",
+      description: "Check out our latest collection of trendy products!"
+    },
+    {
+      title: "Special Offers",
+      description: "Don't miss out on our amazing discounts and deals!"
+    },
+    {
+      title: "Customer Favorites",
+      description: "Discover our most popular and highly-rated items!"
+    }
+  ];
+
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect} className='mb-4 my-dir' >
-      <Carousel.Item >
-        <div className='d-flex sh justify-content-center align-items-center'>
-        <img
-          className="d-block w-25 h-100"
-          src={slider1}
-          alt="First slide"
-        />
-        <div className='text-center'>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </div>
-        </div>
-      </Carousel.Item>
-      <Carousel.Item >
-        <div className='d-flex sh justify-content-center align-items-center'>
-        <img
-          className="d-block w-25 h-100"
-          src={slider2}
-          alt="First slide"
-        />
-        <div className='text-center'>
-          <h3>thecond slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </div>
-        </div>
-      </Carousel.Item>
-      <Carousel.Item >
-        <div className='d-flex sh justify-content-center align-items-center'>
-        <img
-          className="d-block w-25 h-100"
-          src={slider3}
-          alt="First slide"
-        />
-        <div className='text-center'>
-          <h3>third slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </div>
-        </div>
-      </Carousel.Item>
+    <Carousel activeIndex={index} onSelect={handleSelect} className='mb-4 my-dir' style={{ height: '50vh' }}>
+      {[slider1, slider2, slider3].map((slider, idx) => (
+        <Carousel.Item key={idx} style={{ backgroundColor: bgColors[idx] }}>
+          <div className='d-flex justify-content-center align-items-center h-100'>
+            <div className='d-flex flex-column align-items-center'>
+              <img
+                className="d-block"
+                src={slider}
+                alt={`Slide ${idx + 1}`}
+                style={{ width: 'auto', height: '30vh', objectFit: 'contain' }}
+              />
+              <div className='text-center mt-3'>
+                <h3>{slideContent[idx].title}</h3>
+                <p>{slideContent[idx].description}</p>
+              </div>
+            </div>
+          </div>
+        </Carousel.Item>
+      ))}
     </Carousel>
   );
 }

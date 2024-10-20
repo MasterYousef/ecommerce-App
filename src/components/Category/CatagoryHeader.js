@@ -4,9 +4,9 @@ import SubTitleHook from '../../logic/product/SubTitleHook'
 function CatagoryHeader() {
   const [cateegorys,,,,,] = SubTitleHook()
   return (
-    <Navbar className=' bg-white' >
+    <Navbar className='bg-white w-100' >
         <Container>
-          <Nav>
+          <Nav className='d-flex flex-wrap'>
             {
               cateegorys?.length ? (cateegorys.map((e)=><Nav.Link href={`/Category/${e._id}`}>{e.name}</Nav.Link>)) : <h5>لا توجد تصنيفات</h5>
             }

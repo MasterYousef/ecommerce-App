@@ -13,7 +13,7 @@ const [isLoading,cate,colors] = HomeCategoryHook()
         isLoading === false ? (
           cate?.data?.length ? (cate.data.slice(0,5).map((e,index)=>{
             return (<CategoryCard key={index} title={e.name} im={e.image} id={e._id} background={colors[index]}/>)
-          })) : <h2>لا توجد اقسام</h2>
+          })) : <h2>لا توجد تصنيفات</h2>
         ) : <h1>جاري التحميل...<Spinner animation="grow" /></h1>
       }
     </Row>

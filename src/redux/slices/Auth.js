@@ -1,7 +1,6 @@
 import { createSlice , createAsyncThunk} from '@reduxjs/toolkit'
 import {useInsertData} from '../../hooks/useInsertData'
 import useGetDataByToken from '../../hooks/useGetDataByToken';
-import {useUpdateData} from '../../hooks/useUpdateData';
 export const SighnUp = createAsyncThunk('Auth/SighnUp',async (data,thunkAPI)=>{
     const {rejectWithValue} = thunkAPI;
     try{
@@ -32,7 +31,7 @@ export const TokenData = createAsyncThunk('Auth/TokenData',async (url,thunkAPI)=
 export const SendEmail = createAsyncThunk('Auth/SendEmail',async (data,thunkAPI)=>{
     const {rejectWithValue} = thunkAPI;
     try{
-        const respon = await useInsertData('/api/v1/auth/forgotPasswords',data);
+        const respon = await useInsertData('/api/v1/auth/forgotenpassword',data);
         return respon
     }catch(err){
         return rejectWithValue(err.response.data.status)
@@ -41,7 +40,7 @@ export const SendEmail = createAsyncThunk('Auth/SendEmail',async (data,thunkAPI)
 export const SendCode = createAsyncThunk('Auth/SendCode',async (data,thunkAPI)=>{
     const {rejectWithValue} = thunkAPI;
     try{
-        const respon = await useInsertData('/api/v1/auth/verifyResetCode',data);
+        const respon = await useInsertData('/api/v1/auth/resetCode',data);
         return respon
     }catch(err){
         return rejectWithValue(err.response.data.status)
@@ -50,7 +49,7 @@ export const SendCode = createAsyncThunk('Auth/SendCode',async (data,thunkAPI)=>
 export const ResetCode = createAsyncThunk('Auth/ResetCode',async (data,thunkAPI)=>{
     const {rejectWithValue} = thunkAPI;
     try{
-        const respon = await useUpdateData('/api/v1/auth/resetPassword',data);
+        const respon = await useInsertData('/api/v1/auth/resetPassword',data);
         return respon
     }catch(err){
         return rejectWithValue(err.response.data.status)

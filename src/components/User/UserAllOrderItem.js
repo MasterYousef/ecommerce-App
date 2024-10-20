@@ -1,12 +1,11 @@
 import React from 'react'
-import { Row } from 'react-bootstrap'
 import UserAllOrderCard from './UserAllOrderCard'
 
 function UserAllOrderItem({item}) {
   return (
-    <Row className='bg-white rounded my-2'>
-        <div className='d-flex justify-content-between mt-3'>
-        <h4>طلب رقم #{item?._id}</h4>
+    <div className='bg-white rounded my-2'>
+        <div className='d-flex align-items-center align-items-md-start justify-content-md-between flex-column flex-md-row mt-3 p-1'>
+        <div className='fs-5 text-center'>طلب رقم #{item?._id}</div>
         <h5>{item?.createdAt.slice(0,10)}</h5>
         </div>
         {
@@ -18,7 +17,7 @@ function UserAllOrderItem({item}) {
             <div>الدفع :<span className='text-black-50 mx-2'>{item?.isPaid === true ? ("تم "):("لم يتم")}</span></div>
             <p className='fw-bold'>{item?.totalOrderPrice} جنيه</p>
         </div>
-    </Row>
+    </div>
   )
 }
 

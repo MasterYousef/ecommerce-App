@@ -34,7 +34,7 @@ function AdminAddCouponsHook() {
                 toast.error('خطاء تأكد من بيانات الكوبون ')
             }
         }
-    }, [Loading])
+    }, [Loading,res])
     
     return [name,expire,discount,setName,setExpire,setDiscount,onSubmit,Loading]
 }

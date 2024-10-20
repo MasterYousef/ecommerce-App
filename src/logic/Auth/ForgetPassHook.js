@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { SendEmail } from '../../redux/slices/Auth'
 import { toast } from 'react-toastify'
@@ -29,10 +29,10 @@ if(Loading === false){
     }else if(res.data?.status === 'Success'){
         toast.success('تم ارسال الرمز بنجاح')
         localStorage.setItem('reset-email',email)
-        setTimeout(()=>navti('/verify-code'),3000)
+        setTimeout(()=>navti('/verify-code'),1500)
     }
 }
-}, [Loading])
+}, [Loading,res])
     return [email,onChangeEmail,onesubmit,Loading]
 }
 export default ForgetPassHook

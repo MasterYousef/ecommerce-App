@@ -2,7 +2,6 @@ import { createSlice , createAsyncThunk} from '@reduxjs/toolkit'
 import {useInsertData} from '../../../hooks/useInsertData'
 import useGetDataByToken from '../../../hooks/useGetDataByToken';
 import {useUpdateData} from '../../../hooks/useUpdateData'
-import useGetCardOrder from '../../../hooks/useGetCardOrder';
 export const PostOrder = createAsyncThunk('Address/PostAddress',async (obj,thunkAPI)=>{
     const {rejectWithValue} = thunkAPI;
     try{

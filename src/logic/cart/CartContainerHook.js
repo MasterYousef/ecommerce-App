@@ -14,7 +14,7 @@ function CartContainerHook() {
     if (loading === false) {
       if (items?.data?.status === "success") {
         if (items?.data?.data?.coupon) {
-          setCouponName(items?.data?.data?.coupon);
+          setCouponName(items?.data?.data?.coupon.name);
         }
       } else {
         localStorage.removeItem("cart");

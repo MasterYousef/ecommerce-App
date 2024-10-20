@@ -20,7 +20,7 @@ function AdminProductCardHook() {
         setError(false);
         setShow(false);
       })
-      .catch(() => {
+      .catch((err) => {
         setError(true);
         setLoading(false);
         setShow(false);

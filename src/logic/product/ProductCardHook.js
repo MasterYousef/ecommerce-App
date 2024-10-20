@@ -14,6 +14,8 @@ function ProductCardHook(id, favId) {
   const heartOn = async () => {
     if (!user) {
       toast.warn("من فضلك سجل الدخول لحذف المنتج من المفضلة");
+    } else if (user?.role === "admin") {
+      toast.warn("لا يسمح للمشرفين بأضافة منتج الي المفضلة");
     } else {
       setLoading(true);
       await dis(

@@ -8,7 +8,7 @@ function SearchProductHook() {
   const [items, setitems] = useState([]);
   const [num, setnum] = useState([]);
   const [sort, setsort] = useState("-ratingsAverage");
-  const [limit, setlimit] = useState(1);
+  const [limit, setlimit] = useState(12);
   const [page, setpage] = useState(1);
   const [cate, setcate] = useState("");
   const [brand, setbrand] = useState("");
@@ -57,20 +57,38 @@ function SearchProductHook() {
     } else if (!localStorage.getItem("brandSelact")) {
       setbrand("");
     }
-    if (localStorage.getItem("from")&&localStorage.getItem("from")!=="0"&&localStorage.getItem("from")!=="") {
+    if (
+      localStorage.getItem("from") &&
+      localStorage.getItem("from") !== "0" &&
+      localStorage.getItem("from") !== ""
+    ) {
       setfrom(`&price[gte]=${localStorage.getItem("from")}`);
-    }else if(!localStorage.getItem("from")||localStorage.getItem("from")==="0"||localStorage.getItem("from")===""){
-        setfrom("");
-      }
-    if (localStorage.getItem("to")&&localStorage.getItem("to") !== "0"&&localStorage.getItem("to")!=="") {
+    } else if (
+      !localStorage.getItem("from") ||
+      localStorage.getItem("from") === "0" ||
+      localStorage.getItem("from") === ""
+    ) {
+      setfrom("");
+    }
+    if (
+      localStorage.getItem("to") &&
+      localStorage.getItem("to") !== "0" &&
+      localStorage.getItem("to") !== ""
+    ) {
       setto(`&price[lte]=${localStorage.getItem("to")}`);
-    }else if(!localStorage.getItem("to")||localStorage.getItem("to")===0||localStorage.getItem("to")===""){
+    } else if (
+      !localStorage.getItem("to") ||
+      localStorage.getItem("to") === 0 ||
+      localStorage.getItem("to") === ""
+    ) {
       setto("");
     }
   };
-  const Sorting = async (s) => {
-    localStorage.setItem("sort", s);
-    setsort(s);
+  const Sorting = (s) => {
+    if (s) {
+      localStorage.setItem("sort", s);
+      setsort(s);
+    }
   };
   useEffect(() => {
     getStorge();
@@ -79,7 +97,7 @@ function SearchProductHook() {
         `/api/v1/product?keyword=${Search}&limit=${limit}&page=${page}&sort=${sort}${cate}${brand}${to}${from}`
       )
     );
-  }, [Search, sort, page, cate, brand,to,from]);
+  }, [Search, sort, page, cate, brand, to, from]);
   useEffect(() => {
     if (product.data) {
       setitems(product?.data);
@@ -90,7 +108,7 @@ function SearchProductHook() {
     if (product?.paginationResult) {
       setPaginationNum(product?.paginationResult?.numberOfPages);
     }
-  }, [product,Search, sort, page, cate, brand]);
+  }, [product, Search, sort, page, cate, brand]);
   return [
     items,
     Search,
@@ -101,6 +119,9 @@ function SearchProductHook() {
     page,
     Sorting,
     getStorge,
+    setbrand,
+    setfrom,
+    setto
   ];
 }
 export default SearchProductHook;

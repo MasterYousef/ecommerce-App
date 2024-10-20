@@ -23,11 +23,11 @@ const PostAllSubCategory = createSlice({
         },
         [PostSubCategory.fulfilled]:(state,action)=>{
             state.Loading = false;
-            state.error = action.payload.statusText
+            state.error = "Created"
         },
         [PostSubCategory.rejected]:(state,action)=>{
             state.Loading = false;
-            state.error = action.payload
+            state.error = "fail"
         }
     }
 })

@@ -25,13 +25,7 @@ function CartCheckout({price,couponName,setCouponName,totalPriceAfterCo,load}){
                 <button className="bg-dark text-white py-2 border-0 rounded w-100 px-2 mt-2" onClick={onDelete}>حذف العربة</button>
             </Col>
             <Modal
-                show={loading}
-                dialogClassName="modal-90w"
-                aria-labelledby="example-custom-modal-styling-title">
-            <Modal.Body><h1>جاري التحميل...<Spinner animation="grow" /> </h1> </Modal.Body>
-            </Modal>
-            <Modal
-                show={loading2}
+                show={loading||loading2}
                 dialogClassName="modal-90w"
                 aria-labelledby="example-custom-modal-styling-title">
             <Modal.Body><h1>جاري التحميل...<Spinner animation="grow" /> </h1> </Modal.Body>

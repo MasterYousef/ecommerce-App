@@ -29,6 +29,7 @@ function Navbars() {
               style={{ maxHeight: '100px' }}
               navbarScroll
             >
+              <div className='d-flex m-2 justify-content-between'>
               {
                 Loading === true ? (<div className='nav-con text-light text-center fs-1 ms-4'>...</div>):(
                 user?.data ? (<div className='nav-con ms-4'>
@@ -43,12 +44,13 @@ function Navbars() {
               )}
               <Link to="/Cart" className='ms-3 d-flex flex-row-reverse align-items-center position-relative text-decoration-none text-white' >
                 <p className='mb-0 me-1'>العربة
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger mt-1">
+                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger mt-1">
                       {
                         cart >= 99 ? +99 : cart
                       }
                 </span>
                 </p> <img src={cartim} alt='cart'/></Link>
+              </div>
             </Nav>
           </Navbar.Collapse>
         </Container>

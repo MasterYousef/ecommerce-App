@@ -5,7 +5,8 @@ import { GetAllBrand } from "../../redux/slices/Brand/GetBrand";
 import SearchProductHook from "./SearchProductHook";
 
 function SubTitleHook() {
-  const [, , , , , , , getStorge] = SearchProductHook();
+  const [, , , , , , , , setbrand,setfrom, setto] =
+    SearchProductHook();
   const cate = useSelector((state) => state.GetCategory.Category);
   const brand = useSelector((state) => state.GetMyBrand.brand);
   const brands = brand?.data;
@@ -13,8 +14,6 @@ function SubTitleHook() {
   const dis = useDispatch();
   const [cats, setCats] = useState([]);
   const [MyBrands, setMyBrands] = useState([]);
-  const [from, setFrom] = useState("");
-  const [to, setTo] = useState("");
   const opHandllerCate = (e) => {
     if (e.target.checked === true) {
       setCats([...cats, e.target.value]);
@@ -33,36 +32,31 @@ function SubTitleHook() {
   };
   const priceFrom = (e) => {
     localStorage.setItem("from", e);
-    setFrom(e);
+    setfrom(e);
   };
   const priceto = (e) => {
     localStorage.setItem("to", e);
-    setTo(e);
+    setto(e);
   };
   useEffect(() => {
     if (cats.includes("الكل")) {
       localStorage.removeItem("cateSelact");
-      getStorge();
     } else {
       let selctedCate = cats?.map((c) => "&category[in][]=" + c).join("&");
       localStorage.setItem("cateSelact", selctedCate);
-      getStorge();
     }
     if (MyBrands.includes("الكل")) {
       localStorage.removeItem("brandSelact");
-      getStorge();
+      setbrand("");
     } else {
       let selctedBrand = MyBrands?.map((c) => "&brand[in][]=" + c).join("&");
       localStorage.setItem("brandSelact", selctedBrand);
-      getStorge();
+      setbrand(selctedBrand);
     }
   }, [cats, MyBrands]);
   useEffect(() => {
-    getStorge();
-  }, [from, to]);
-  useEffect(() => {
-    dis(GetCategory("/api/v1/category"));
-    dis(GetAllBrand("/api/v1/brand"));
+    dis(GetCategory("/api/v1/category?limit=20"));
+    dis(GetAllBrand("/api/v1/brand?limit=20"));
   }, []);
   return [
     cateegorys,

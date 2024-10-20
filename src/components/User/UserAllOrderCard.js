@@ -2,8 +2,8 @@ import React from 'react'
 import { Col, Row } from 'react-bootstrap'
 function UserAllOrderCard({item}) {
   return (
-    <Col xs="12" className="bg-white rounded p-1  d-flex px-2">
-    <img width="160px" height="197px" src={item?.product.imageCover} alt="" className='rounded mx-2'/>
+    <div  className="bg-white rounded p-1 w-100 d-flex px-2 align-items-center">
+    <img src={item?.product.imageCover} alt="" className='rounded mx-2 w-25'/>
     <div className="w-100">
       <Row className="justify-content-center mt-2">
         <Col sm="12" className=" d-flex flex-row justify-content-start">
@@ -12,7 +12,7 @@ function UserAllOrderCard({item}) {
       </Row>
       <Row>
         <Col sm="12" className="mt-1">
-        <div className="text-warning  d-inline  p-1 pt-2">{item?.product.ratingsAverage} <i class="fa-solid fa-star"></i></div>
+        <div className="text-warning  d-inline  p-1 pt-2">{item?.product.ratingsAverage} <i className="fa-solid fa-star"></i></div>
         <div className="text-black-50 d-inline p-1 pt-2">({`${item?.product.ratingsQuantity} تقييم`})</div>
         </Col>
       </Row>
@@ -38,7 +38,7 @@ function UserAllOrderCard({item}) {
         </Col>
       </Row>
     </div>
-  </Col>
+  </div>
   )
 }
 

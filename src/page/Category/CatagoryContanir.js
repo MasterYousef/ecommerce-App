@@ -10,9 +10,9 @@ const [isLoading,cate,colors,page,SetPage] = CatagoryContanirHook()
         <Row className='mb-5 justify-content-evenly'>
         {
         isLoading === false ? (
-          cate.data.length ? (cate.data.map((e,index)=>{
+          cate?.data?.length ? (cate?.data.map((e,index)=>{
             return (<CategoryCard key={index} title={e.name} im={e.image} id={e._id} background={colors[Math.floor(Math.random() * 5 +1)]}/>)
-          })) : null
+          })) : <h1>لا يوجد بيانات</h1>
         ) : <h1>جاري التحميل...<Spinner animation="grow" /> </h1>
       }
         </Row>

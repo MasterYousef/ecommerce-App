@@ -12,7 +12,7 @@ function ProductInfoConHook(id) {
     dis(GetProduct(id)).then((i) => {
       dis(GetOnecate(i.payload?.data?.category._id));
     });
-  }, []);
+  }, [id]);
   useEffect(() => {
     if (cate) {
       dis(GetProducts(`/api/v1/product?category=${cate?.data?._id}`));

@@ -20,14 +20,15 @@ const PostAllCategory = createSlice({
     extraReducers:{
         [PostCategory.pending]:(state,action)=>{
             state.Loading = true;
+            state.error = []
         },
         [PostCategory.fulfilled]:(state,action)=>{
             state.Loading = false;
-            state.error = action.payload.statusText
+            state.error = "Created"
         },
         [PostCategory.rejected]:(state,action)=>{
             state.Loading = false;
-            state.error = action.payload
+            state.error = 'fail'
         }
     }
 })

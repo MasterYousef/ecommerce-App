@@ -20,12 +20,12 @@ function PaymentChooseHook() {
 
   useEffect(() => {
     if (cart?.data?.data?.totalPriceAfterDiscount) {
-      setPrice(cart?.data?.totalPriceAfterDiscount);
-    } else {
+      setPrice(cart?.data?.data?.totalPriceAfterDiscount);
+    } else if (cart?.data?.data?.totalPrice) {
       setPrice(cart?.data?.data?.totalPrice);
     }
   }, [cart]);
-  const onSubmit = () => {
+  const onSubmit = async () => {
     if (Pay === "") {
       toast.warn("من فضلك اختر طريقة الدفع");
       return;
@@ -35,19 +35,19 @@ function PaymentChooseHook() {
     } else if (Pay === "الدفع عند الاستلام") {
       setLoading(true);
       const obj = {
-        id: cart?.data?._id,
+        id: cart?.data?.data?._id,
         data: {
           shippingAddress: res?.data?.addresses[option - 1]?._id,
         },
       };
-      dis(PostOrder(obj));
+      await dis(PostOrder(obj));
       setLoading(false);
     } else if (Pay === "الدفع عن طريق الفيزا") {
       const obj = {
-        shippingAddress: res?.data?.addresses[option - 1]?._id
+        shippingAddress: res?.data?.addresses[option - 1]?._id,
       };
       setLoading2(true);
-      dis(PostCardOrder(obj));
+      await dis(PostCardOrder(obj));
       setLoading2(false);
     }
   };
@@ -62,24 +62,34 @@ function PaymentChooseHook() {
       } else if (order?.data?.status === "success") {
         toast.success("تم عمل الطلب بنجاح");
         localStorage.removeItem("cart");
+        dis(GetCart())
         setTimeout(() => {
           navti("/user/allorders");
-        }, 2000);
+        }, 1000);
       }
     }
-  }, [order]);
+  }, [order,loading]);
   useEffect(() => {
     if (loading2 === false) {
       if (Card?.data?.status === "success") {
         if (Card?.data?.data?.url) {
           window.open(Card?.data?.data?.url);
         }
-      } else if(Card?.status !== "success"){
+      } else if (Card?.status !== "success") {
         toast.error("حدث خطاء ما الرجاء المحاولة لاحقا");
       }
     }
-  }, [Card]);
-  return [price, res?.data, setPay, option, setOption, onSubmit, loading, loading2];
+  }, [Card,loading2]);
+  return [
+    price,
+    res?.data,
+    setPay,
+    option,
+    setOption,
+    onSubmit,
+    loading,
+    loading2,
+  ];
 }
 
 export default PaymentChooseHook;

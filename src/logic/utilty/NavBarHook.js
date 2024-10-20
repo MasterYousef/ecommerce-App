@@ -49,6 +49,6 @@ function NavBarHook() {
       setCart(0);
     }
   }, [cartNumber]);
-  return [user, logout, cart, Loading];
+  return [user, logout, cart, Loading ];
 }
 export default NavBarHook;
