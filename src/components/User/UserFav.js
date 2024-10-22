@@ -1,7 +1,6 @@
 import React from 'react'
 import { Row, Spinner } from 'react-bootstrap'
 import ProductCard from '../product/ProductCard'
-import im from '../../images/prod1.png'
 import UserFavHook from '../../logic/product/UserFavHook'
 import GetFavProductHook from '../../logic/product/GetFavProductHook'
 function UserFav() {
