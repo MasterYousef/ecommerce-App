@@ -38,7 +38,7 @@ function App() {
   const [isUser,isAdmin] = AppHook()
   return (
     <div className='font'>
-      <BrowserRouter>
+      <BrowserRouter basename="/ecommerce-App">
       <Navbars/>
       <Routes>
         <Route index element={<HomePage/>}/>
