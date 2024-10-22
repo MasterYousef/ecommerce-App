@@ -26,16 +26,16 @@ function HomeSlider() {
   ];
 
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect} className='mb-4 my-dir' style={{ height: '50vh' }}>
+    <Carousel activeIndex={index} onSelect={handleSelect} className='mb-4 my-dir' style={{ height: 'auto', minHeight: '50vh' }}>
       {[slider1, slider2, slider3].map((slider, idx) => (
-        <Carousel.Item key={idx} style={{ backgroundColor: bgColors[idx] }}>
-          <div className='d-flex justify-content-center align-items-center h-100'>
+        <Carousel.Item key={idx} style={{ backgroundColor: bgColors[idx], minHeight: '50vh' }}>
+          <div className='d-flex justify-content-center align-items-center h-100 py-4'>
             <div className='d-flex flex-column align-items-center'>
               <img
                 className="d-block"
                 src={slider}
                 alt={`Slide ${idx + 1}`}
-                style={{ width: 'auto', height: '30vh', objectFit: 'contain' }}
+                style={{ width: 'auto', maxHeight: '30vh', objectFit: 'contain' }}
               />
               <div className='text-center mt-3'>
                 <h3>{slideContent[idx].title}</h3>
