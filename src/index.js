@@ -1,12 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import {Provider} from "react-redux"
-import StoreApp from './redux/Store';
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import { Provider } from "react-redux";
+import StoreApp from "./redux/Store";
+import { BrowserRouter } from "react-router-dom";
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <Provider store={StoreApp}>
-        <App />
-    </Provider>
+  <Provider store={StoreApp}>
+    <BrowserRouter basename="/ecommerce-App">
+      <App />
+    </BrowserRouter>
+  </Provider>
 );
