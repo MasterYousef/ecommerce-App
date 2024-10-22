@@ -40,15 +40,15 @@ function App() {
     <div className="font">
       <Navbars />
       <Routes>
-        <Route index element={<HomePage />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/ecommerce-App" element={<HomePage />} />
+        <Route path="/ecommerce-App/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forget-password" element={<ForgetPass />} />
         <Route path="/reset-password" element={<ResetPass />} />
         <Route path="/verify-code" element={<VerifyCode />} />
         <Route path="/Category/:id" element={<ProductByCategory />} />
-        <Route path="/Categorys" element={<CatagoryContanir />} />
-        <Route path="/Brands" element={<BrandContanir />} />
+        <Route path="/ecommerce-App/Categorys" element={<CatagoryContanir />} />
+        <Route path="/ecommerce-App/Brands" element={<BrandContanir />} />
         <Route path="/Brand/:id" element={<ProductByBrand />} />
         <Route path="/Search" element={<SearchProduct />} />
         <Route path="/Products/:id" element={<ProductsInfo />} />
