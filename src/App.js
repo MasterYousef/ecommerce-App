@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
 import HomePage from "./page/home/HomePage";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Footer from "./components/utilty/Footer";
 import Navbars from "./components/utilty/NavBar";
 import Login from "./page/Auth/Login";
