@@ -40,7 +40,7 @@ function App() {
     <div className="font">
       <Navbars />
       <Routes>
-        <Route path="/ecommerce-App" element={<HomePage />} />
+        <Route index element={<HomePage />} />
         <Route path="/ecommerce-App/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forget-password" element={<ForgetPass />} />
