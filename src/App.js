@@ -41,7 +41,7 @@ function App() {
       <Navbars />
       <Routes>
         <Route index element={<HomePage />} />
-        <Route path="/ecommerce-App/login" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forget-password" element={<ForgetPass />} />
         <Route path="/reset-password" element={<ResetPass />} />
