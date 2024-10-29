@@ -47,8 +47,8 @@ function App() {
         <Route path="/reset-password" element={<ResetPass />} />
         <Route path="/verify-code" element={<VerifyCode />} />
         <Route path="/Category/:id" element={<ProductByCategory />} />
-        <Route path="/ecommerce-App/Categorys" element={<CatagoryContanir />} />
-        <Route path="/ecommerce-App/Brands" element={<BrandContanir />} />
+        <Route path="/Categorys" element={<CatagoryContanir />} />
+        <Route path="/Brands" element={<BrandContanir />} />
         <Route path="/Brand/:id" element={<ProductByBrand />} />
         <Route path="/Search" element={<SearchProduct />} />
         <Route path="/Products/:id" element={<ProductsInfo />} />
