@@ -42,18 +42,12 @@ function Navbars() {
                 <div className="nav-con ms-4">
                   <NavDropdown title={user?.data?.name} id="basic-nav-dropdown">
                     {user?.data?.role === "admin" ? (
-                      <NavDropdown.Item
-                        className="text-end pe-1 py-2"
-                        href="/admin/allProducts"
-                      >
-                        لوحة التحكم{" "}
+                      <NavDropdown.Item className="text-end pe-1 py-2">
+                        <Link to="/admin/allProducts">لوحة التحكم </Link>
                       </NavDropdown.Item>
                     ) : (
-                      <NavDropdown.Item
-                        className="text-end pe-1 py-2"
-                        href="/user/profile"
-                      >
-                        الصفحة الشخصية
+                      <NavDropdown.Item className="text-end pe-1 py-2">
+                        <Link to="/user/profile"> الصفحة الشخصية</Link>
                       </NavDropdown.Item>
                     )}
                     <NavDropdown.Divider className="m-0" />
