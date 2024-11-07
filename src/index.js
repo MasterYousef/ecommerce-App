@@ -8,7 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={StoreApp}>
-    <BrowserRouter basename="/ecommerce-App">
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </Provider>
