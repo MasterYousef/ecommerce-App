@@ -35,7 +35,7 @@ function Navbars() {
                 user?.data ? (<div className='nav-con ms-4'>
                 <NavDropdown title={user?.data?.name} id="basic-nav-dropdown">
                   {
-                    user?.data?.role === 'admin' ? (<NavDropdown.Item className='text-end pe-1 py-2' href="/admin/allProducts">لوحة التحكم </NavDropdown.Item>):(<NavDropdown.Item className='text-end pe-1 py-2' href="/user/profile">الصفحة الشخصية</NavDropdown.Item>)
+                    user?.data?.role === 'admin' ? (<NavDropdown.Item className='text-end pe-1 py-2' href="/ecommerce-App/admin/allProducts">لوحة التحكم </NavDropdown.Item>):(<NavDropdown.Item className='text-end pe-1 py-2' href="/ecommerce-App/user/profile">الصفحة الشخصية</NavDropdown.Item>)
                   }
                 <NavDropdown.Divider className='m-0' />
                 <NavDropdown.Item className='text-end pe-1 py-2' onClick={logout} >تسجيل الخروج</NavDropdown.Item>

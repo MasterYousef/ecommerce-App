@@ -18,8 +18,8 @@ function SearchProductHook() {
   const changeSearch = (e) => {
     localStorage.setItem("search", e.target.value);
     SetSearch(e.target.value);
-    if (window.location.pathname !== "/Search") {
-      window.location.href = "/Search";
+    if (window.location.pathname !== "/ecommerce-App/Search") {
+      window.location.href = "/ecommerce-App/Search";
     }
   };
   const sorting = (e) => {
