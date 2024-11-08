@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { GetCoupons, PostCoupons } from '../../redux/slices/Coupons/Coupons';
+import { GetCoupons, PostCoupons, resetAll } from '../../redux/slices/Coupons/Coupons';
 function AdminAddCouponsHook() {
     const dis = useDispatch()
     const res = useSelector((state)=>state.CouponsSlice.error)
@@ -24,13 +24,14 @@ function AdminAddCouponsHook() {
     }
     useEffect(() => {
         if (Loading === false){
-            if (res === true) {
+            if (res === false) {
                 toast.success('تم اضافة الكوبون بنجاح')
                 setName('')
                 setExpire('')
                 setDiscount('')
+                dis(resetAll())
                 dis(GetCoupons())
-            }else if (res === false){
+            }else if (res === true){
                 toast.error('خطاء تأكد من بيانات الكوبون ')
             }
         }

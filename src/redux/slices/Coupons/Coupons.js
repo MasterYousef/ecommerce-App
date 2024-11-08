@@ -49,6 +49,11 @@ const initialState = {
 const CouponsSlice = createSlice({
     name:'CouponsSlice',
     initialState,
+    reducers: {
+        resetAll: (state) => {
+            return initialState;
+        }
+    },
     extraReducers:{
         [PostCoupons.pending]:(state,action)=>{
             state.Loading = true;
@@ -56,10 +61,12 @@ const CouponsSlice = createSlice({
         [PostCoupons.fulfilled]:(state,action)=>{
             state.Loading = false;
             state.PostData = action.payload
+            state.error = false
         },
         [PostCoupons.rejected]:(state,action)=>{
             state.Loading = false;
             state.PostData = action.payload
+            state.error = true
         },[GetCoupons.fulfilled]:(state,action)=>{
             state.GetRes = action.payload
         },
@@ -80,4 +87,6 @@ const CouponsSlice = createSlice({
         }
     }
 })
+
+export const { resetAll } = CouponsSlice.actions
 export default CouponsSlice.reducer
