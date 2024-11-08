@@ -33,6 +33,7 @@ function AdminAddCouponsHook() {
                 dis(GetCoupons())
             }else if (res === true){
                 toast.error('خطاء تأكد من بيانات الكوبون ')
+                dis(resetAll())
             }
         }
     }, [Loading,res])
