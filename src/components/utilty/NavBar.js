@@ -45,7 +45,7 @@ function Navbars() {
                       <NavDropdown.Item className="text-end pe-1 py-2">
                         <Link
                           to="/admin/allProducts"
-                          className="text-decoration-none text-dark"
+                          className="text-decoration-none text-dark w-100"
                         >
                           لوحة التحكم{" "}
                         </Link>
@@ -54,7 +54,7 @@ function Navbars() {
                       <NavDropdown.Item className="text-end pe-1 py-2">
                         <Link
                           to="/user/profile"
-                          className="text-decoration-none text-dark"
+                          className="text-decoration-none text-dark w-100"
                         >
                           {" "}
                           الصفحة الشخصية
