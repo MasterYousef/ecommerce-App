@@ -46,7 +46,7 @@ function Navbars() {
                         to="/admin/allProducts"
                         className="text-decoration-none text-dark w-100 text-end pe-1 py-2"
                       >
-                        لوحة التحكم{" "}
+                        <NavDropdown.Item>لوحة التحكم </NavDropdown.Item>
                       </Link>
                     ) : (
                       <NavDropdown.Item className="text-end pe-1 py-2">
