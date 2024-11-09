@@ -1,3 +1,3 @@
 import axios from "axios";
-const BaseUrl = axios.create({ baseURL: "https://ecommerce-back-end-k901.onrender.com" });
+const BaseUrl = axios.create({ baseURL: "" });
 export default BaseUrl;

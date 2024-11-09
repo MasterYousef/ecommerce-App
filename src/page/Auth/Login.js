@@ -8,9 +8,9 @@ function Login() {
     LoginHook();
   return (
     <div style={{ minHeight: "80vh" }}>
-      <Row className="w-100 text-center mt-5">
+      <Row className="w-100 text-center mt-5 mx-auto">
         <Col className="p-0 mx-auto" xs="10" md="4">
-          <Form className="">
+          <Form>
             <h2>تسجيل الدخول</h2>
             <Form.Group className="mb-2">
               <Form.Control

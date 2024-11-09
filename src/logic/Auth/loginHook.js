@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { login, TokenData , resetState  } from "../../redux/slices/Auth";
-import { useNavigate } from "react-router-dom";
+import { login, TokenData, resetState } from "../../redux/slices/Auth";
 function LoginHook() {
-  const route = useNavigate();
   const [email, SetEmail] = useState("");
   const [password, SetPassword] = useState("");
   const res = useSelector((state) => state.Authentication.LoginRes);
@@ -44,14 +42,14 @@ function LoginHook() {
       if (res === "user not found" || res === "wrong password") {
         localStorage.removeItem("token");
         toast.error("خطاء في كلمة السر او البريد الالكتروني");
-        dis(resetState())
+        dis(resetState());
       } else if (res?.status === 200) {
         toast.success("تم تسجيل الدخول بنجاح");
-        dis(resetState())
+        dis(resetState());
         if (res?.data?.token) {
           localStorage.setItem("token", res?.data?.token);
           setTimeout(() => {
-            route("/");
+            window.location.href = "/";
             dis(TokenData());
           }, 500);
         }
@@ -63,10 +61,10 @@ function LoginHook() {
           "حدث خطاء اثناء تسجيل الدخول الرجاء المحاولة مرة اخرى لاحقا"
         );
         localStorage.removeItem("token");
-        dis(resetState())
+        dis(resetState());
       }
     }
-  }, [res,Loading]);
+  }, [res, Loading]);
   return [email, onChangeEmail, password, onChangePassword, onesubmit, Loading];
 }
 
