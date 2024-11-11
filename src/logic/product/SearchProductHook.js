@@ -7,7 +7,6 @@ const useSearchProduct = () => {
   const { data, totalResults, paginationResult } = useSelector(
     (state) => state.SearchProducts.Products
   );
-
   const [searchParams, setSearchParams] = useState({
     query: localStorage.getItem("searchQuery") || "",
     sort: localStorage.getItem("sort") || "-ratingsAverage",
@@ -20,10 +19,20 @@ const useSearchProduct = () => {
       max: localStorage.getItem("priceMax") || "",
     },
   });
-
   const handleSearch = useCallback((value) => {
     localStorage.setItem("searchQuery", value);
-    setSearchParams((prev) => ({ ...prev, query: value }));
+    setSearchParams({
+      query: value,
+      sort: localStorage.getItem("sort") || "-ratingsAverage",
+      page: localStorage.getItem("page") || 1,
+      category: localStorage.getItem("category") || "",
+      limit: 12,
+      brand: localStorage.getItem("brand") || "",
+      priceRange: {
+        min: localStorage.getItem("priceMin") || "",
+        max: localStorage.getItem("priceMax") || "",
+      },
+    });
     if (window.location.pathname !== "/Search") {
       window.location.href = "/Search";
     }
@@ -36,29 +45,36 @@ const useSearchProduct = () => {
 
   const handlePageChange = useCallback((page) => {
     localStorage.setItem("page", page);
-    setSearchParams((prev) => ({
-      ...prev,
+    setSearchParams({
+      query: localStorage.getItem("searchQuery") || "",
+      sort: localStorage.getItem("sort") || "-ratingsAverage",
+      limit: 12,
       page,
+      category: localStorage.getItem("category") || "",
+      brand: localStorage.getItem("brand") || "",
       priceRange: {
         min: localStorage.getItem("priceMin") || "",
         max: localStorage.getItem("priceMax") || "",
       },
-    }));
+    });
   }, []);
 
   const handleFilters = useCallback(
     ({ category, brand, priceMin, priceMax }) => {
       if (priceMax !== undefined) localStorage.setItem("priceMax", priceMax);
       if (priceMax !== undefined) localStorage.setItem("priceMax", priceMax);
-      setSearchParams((prev) => ({
-        ...prev,
+      setSearchParams({
+        query: localStorage.getItem("searchQuery") || "",
+        sort: localStorage.getItem("sort") || "-ratingsAverage",
+        page: localStorage.getItem("page") || 1,
+        limit: 12,
         category: category || localStorage.getItem("category") || "",
         brand: brand || localStorage.getItem("brand") || "",
         priceRange: {
           min: priceMin || localStorage.getItem("priceMin") || "",
           max: priceMax || localStorage.getItem("priceMax") || "",
         },
-      }));
+      });
     },
     []
   );
