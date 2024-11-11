@@ -1,70 +1,122 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GetCategory } from "../../redux/slices/Category/GetAllCategorySlice";
 import { GetAllBrand } from "../../redux/slices/Brand/GetBrand";
-import SearchProductHook from "./SearchProductHook";
+import useSearchProduct from "./SearchProductHook";
 
-function SubTitleHook() {
-  const [, , , , , , , , setbrand,setfrom, setto] =
-    SearchProductHook();
-  const cate = useSelector((state) => state.GetCategory.Category);
-  const brand = useSelector((state) => state.GetMyBrand.brand);
-  const brands = brand?.data;
-  const cateegorys = cate?.data;
-  const dis = useDispatch();
-  const [cats, setCats] = useState([]);
-  const [MyBrands, setMyBrands] = useState([]);
-  const opHandllerCate = (e) => {
-    if (e.target.checked === true) {
-      setCats([...cats, e.target.value]);
-    } else if (e.target.checked === false) {
-      let NewCats = cats.filter((event) => event !== e.target.value);
-      setCats(NewCats);
-    }
-  };
-  const opHandllerBrands = (e) => {
-    if (e.target.checked === true) {
-      setMyBrands([...MyBrands, e.target.value]);
-    } else if (e.target.checked === false) {
-      let NewBrand = MyBrands.filter((event) => event !== e.target.value);
-      setMyBrands(NewBrand);
-    }
-  };
-  const priceFrom = (e) => {
-    localStorage.setItem("from", e);
-    setfrom(e);
-  };
-  const priceto = (e) => {
-    localStorage.setItem("to", e);
-    setto(e);
-  };
+const useSubTitle = () => {
+  const dispatch = useDispatch();
+  const { handleFilters } = useSearchProduct();
+  const categories = useSelector((state) => state.GetCategory.Category?.data);
+  const brands = useSelector((state) => state.GetMyBrand.brand?.data);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedBrands, setSelectedBrands] = useState([]);
+  const [brandCheckAll, setBrandCheckAll] = useState(false);
+  const [categoryCheckAll, setCategoryCheckAll] = useState(false);
+  const [priceRange, setPriceRange] = useState({
+    min: localStorage.getItem("priceMin") || "",
+    max: localStorage.getItem("priceMax") || "",
+  });
+  const handleCategoryChange = useCallback(
+    (e) => {
+      const { value, checked } = e.target;
+      setSelectedCategories((prev) => {
+        let categories;
+        const updated = checked
+          ? [...prev, value]
+          : prev.filter((cat) => cat !== value);
+        if (value === "الكل") {
+          localStorage.removeItem("category");
+          setCategoryCheckAll(true);
+          setSelectedCategories([]);
+        } else {
+          categories = updated.map((category) => `category[in][]=${category}`);
+          localStorage.setItem("category", categories.join("&"));
+          setCategoryCheckAll(false);
+        }
+        handleFilters({ category: categories?.join("&") });
+        return updated;
+      });
+    },
+    [handleFilters]
+  );
+
+  const handleBrandChange = useCallback(
+    (e) => {
+      const { value, checked } = e.target;
+      setSelectedBrands((prev) => {
+        let brands;
+        const updated = checked
+          ? [...prev, value]
+          : prev.filter((brand) => brand !== value);
+        if (value === "الكل") {
+          localStorage.removeItem("brand");
+          setBrandCheckAll(checked);
+          setSelectedBrands([]);
+        } else {
+          brands = updated.map((brand) => `brand[in][]=${brand}`);
+          localStorage.setItem("brand", brands.join("&"));
+          setBrandCheckAll(false);
+        }
+        handleFilters({ brand: brands?.join("&") });
+        return updated;
+      });
+    },
+    [handleFilters]
+  );
+  const handlePriceFrom = useCallback(
+    (value) => {
+      setPriceRange((prev) => {
+        const updated = { ...prev, min: value };
+        localStorage.setItem("priceMin", value);
+        handleFilters({ priceMin: value });
+        return updated;
+      });
+    },
+    [handleFilters]
+  );
+  const handlePriceTo = useCallback(
+    (value) => {
+      setPriceRange((prev) => {
+        const updated = { ...prev, max: value };
+        localStorage.setItem("priceMax", value);
+        handleFilters({ priceMax: value });
+        return updated;
+      });
+    },
+    [handleFilters]
+  );
   useEffect(() => {
-    if (cats.includes("الكل")) {
-      localStorage.removeItem("cateSelact");
-    } else {
-      let selctedCate = cats?.map((c) => "&category[in][]=" + c).join("&");
-      localStorage.setItem("cateSelact", selctedCate);
-    }
-    if (MyBrands.includes("الكل")) {
-      localStorage.removeItem("brandSelact");
-      setbrand("");
-    } else {
-      let selctedBrand = MyBrands?.map((c) => "&brand[in][]=" + c).join("&");
-      localStorage.setItem("brandSelact", selctedBrand);
-      setbrand(selctedBrand);
-    }
-  }, [cats, MyBrands]);
+    dispatch(GetCategory("/api/v1/category?limit=20"));
+    dispatch(GetAllBrand("/api/v1/brand?limit=20"));
+  }, [dispatch]);
   useEffect(() => {
-    dis(GetCategory("/api/v1/category?limit=20"));
-    dis(GetAllBrand("/api/v1/brand?limit=20"));
+    const category = localStorage.getItem("category");
+    const brands = localStorage.getItem("brand");
+    if (category) {
+      const category_data = category
+        .replaceAll("category[in][]=", "")
+        .split("&");
+      setSelectedCategories(category_data);
+    }
+    if (brands) {
+      const brand_data = brands.replaceAll("brand[in][]=", "").split("&");
+      setSelectedBrands(brand_data);
+    }
   }, []);
-  return [
-    cateegorys,
+  return {
+    categories,
     brands,
-    opHandllerCate,
-    opHandllerBrands,
-    priceFrom,
-    priceto,
-  ];
-}
-export default SubTitleHook;
+    handleCategoryChange,
+    handleBrandChange,
+    handlePriceFrom,
+    handlePriceTo,
+    selectedCategories,
+    selectedBrands,
+    priceRange,
+    brandCheckAll,
+    categoryCheckAll,
+  };
+};
+
+export default useSubTitle;

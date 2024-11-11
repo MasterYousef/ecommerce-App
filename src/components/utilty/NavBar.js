@@ -6,7 +6,7 @@ import SearchProductHook from "../../logic/product/SearchProductHook";
 import NavBarHook from "../../logic/utilty/NavBarHook";
 import { Link } from "react-router-dom";
 function Navbars() {
-  const [, , changeSearch] = SearchProductHook();
+  const search = SearchProductHook();
   const [user, logout, cart, Loading] = NavBarHook();
   return (
     <Navbar bg="dark" expand="lg" variant="dark">
@@ -20,12 +20,12 @@ function Navbars() {
         <Navbar.Collapse id="navbarScroll">
           <Form className="d-flex w-100 justify-content-center">
             <Form.Control
-              value={localStorage.getItem("search")}
+              value={localStorage.getItem("searchQuery")}
               type="search"
               placeholder="البحث"
               className="w-75"
               aria-label="Search"
-              onChange={(e) => changeSearch(e)}
+              onChange={(e) => search.handleSearch(e.target.value)}
             />
           </Form>
           <Nav
