@@ -73,7 +73,7 @@ function PaymentChooseHook() {
     if (loading2 === false) {
       if (Card?.data?.status === "success") {
         if (Card?.data?.data?.url) {
-          window.open(Card?.data?.data?.url);
+          window.location.href = Card?.data?.data?.url
         }
       } else if (Card?.status !== "success") {
         toast.error("حدث خطاء ما الرجاء المحاولة لاحقا");
