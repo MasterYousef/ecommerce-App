@@ -35,8 +35,6 @@ if(loading === false){
     if(res?.data?.message === "product added successfully"){
         toast.success("تم اضافة المنتج الي العربة")
     }else if(res?.data?.message !== "product added successfully"){
-        console.log(res);
-        
         toast.error("حدث خطاء ما لم يتم اضافة المنتج")
     }
 }

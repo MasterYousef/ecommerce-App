@@ -3,7 +3,7 @@ import useGetDataByToken from '../../../hooks/useGetDataByToken';
 export const GetUserOrder = createAsyncThunk('Address/PostAddress',async (obj,thunkAPI)=>{
     const {rejectWithValue} = thunkAPI;
     try{
-        const respon = await useGetDataByToken(`/api/v1/order?limit=${obj.limit}&page=${obj.page}`);
+        const respon = await useGetDataByToken(`/api/v1/order?sort=-createdAt&limit=${obj.limit}&page=${obj.page}`);
         return respon
     }catch(err){
         return rejectWithValue(err.response.data) 
