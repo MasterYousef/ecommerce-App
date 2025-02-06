@@ -1,5 +1,5 @@
 import axios from "axios";
 const BaseUrl = axios.create({
-  baseURL: "https://ecommerce-back-end-production.up.railway.app",
+  baseURL: "https://convinced-lorette-o0sans0o-e9753239.koyeb.app",
 });
 export default BaseUrl;
